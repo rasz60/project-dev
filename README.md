@@ -14,7 +14,7 @@
 - java 17
 - Spring-Boot v2.4.2 : swagger 호환 버전으로 적용
 - JPA
-- MySQL
+- MySQL v8.0.29
 - 
 
 [Front]
@@ -24,9 +24,11 @@
 
 [library]
 - lombok v1.18.24 : spring-boot 호환 버전으로 적용
+- 
 
 ## 프로젝트 실행
-- 
+- Node.js 설치 : https://nodejs.org/ko/download/releases/
+- Vue CLI 설치 : npm i -g @vue/cli
 - 
 - 
 - 
