@@ -1,8 +1,8 @@
 package com.board.DemoBoard.domain;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

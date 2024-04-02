@@ -1,7 +1,9 @@
 package com.board.DemoBoard.domain;
 
-import jakarta.persistence.*;
+import com.board.DemoBoard.dto.UserForm;
 import lombok.Getter;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -29,4 +31,15 @@ public class User {
     @Column(length = 50, nullable = false)
     private String password;
 
+    public User(){};
+
+    public User(UserForm userForm) {
+        this.email = userForm.getEmail();
+        this.userName = userForm.getUserName();
+        this.password = userForm.getPassword();
+    }
+
+    public static User createUser(UserForm userForm) {
+        return new User(userForm);
+    }
 }
