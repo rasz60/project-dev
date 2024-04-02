@@ -1,0 +1,25 @@
+.header__logo {
+  border-bottom: 1px solid var(--black100);
+
+  a {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+
+    em {
+      width: 40px;
+      height: 40px;
+      display: block;
+      background-color: var(--purple);
+      margin-right: 10px;
+      animation: ani 20s 20s ease-in-out infinite;
+    }
+
+    span {
+      font-size: 20px;
+      line-height: 2;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+  }
+}

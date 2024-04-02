@@ -1,9 +1,5 @@
-<script setup>
-import { RouterView } from "vue-router";
-</script>
-
 <template lang="">
-  <RouterView />
+  <div></div>
 </template>
 <script>
 export default {};
