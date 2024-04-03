@@ -4,6 +4,7 @@ import HeaderSection from "@/components/section/HeaderSection.vue";
 
 <template lang="">
   <HeaderSection />
+  <MenuSection />
 </template>
 <script>
 export default {};
