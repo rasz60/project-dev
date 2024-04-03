@@ -4,12 +4,9 @@ import { headerMenus } from "../../data/header";
 
 <template lang="">
   <div className="header__menu">
+    <p>{{ headerMenus }}</p>
     <ul className="menu">
-      <li v-for="(nav, key) in headerMenus" :key="key">
-        <a :href="nav.url">{{ nav.title }}</a>
-      </li>
+      <li></li>
     </ul>
   </div>
 </template>
-
-<script></script>

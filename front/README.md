@@ -35,6 +35,10 @@ npm i -D sass-loader@^10 sass --no-fund
 
 ```
 
+```
+npm i axios --no-fund
+```
+
 ## VS Code Plugin
 
 - Prettier - Code formatter : 코드 정렬
