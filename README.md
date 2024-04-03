@@ -4,7 +4,8 @@
 
 ## 사용 스택
 [IDE]
-- intellij community 2023.2.5
+- BACKEND : intellij community 2023.2.5
+- FRONT : VS CODE
 
 [Build]
 - AWS
