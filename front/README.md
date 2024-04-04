@@ -47,3 +47,6 @@ npm i axios --no-fund
 - Auto Close Tag : 닫는 태그 자동 생성
 - vetur : .vue 파일의 코드 하이라이팅 지원
 - vue 3 snippets : .vue 파일 생성 시 초기 코드 snippets 지정 (vueInit)
+
+## 참고
+- https://dev-jwblog.tistory.com/109

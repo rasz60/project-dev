@@ -7,7 +7,41 @@ export const headerMenus = [
   },
 ];
 */
+export const getJson = () => {
+  const HeaderMenus = {
+    name: "MenuSection",
+    data() {
+      return {
+        data: [],
+        id: 1,
+      };
+    },
+    methods: {
+      get() {
+        this.axios
+          .get(
+            `https://jsonplaceholder.typicode.com/todos/${this.id}`,
+            {},
+            {
+              header: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((result) => {
+            console.log(result.data);
+            this.data.push(result.data);
+            this.id++;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log("finally");
+          });
+      },
+    },
+  };
 
-export const headerMenus = () => {
-  //axios 어떻게 하는 거냐.
+  HeaderMenus.get();
 };
