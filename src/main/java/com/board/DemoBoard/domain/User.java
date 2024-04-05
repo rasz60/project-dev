@@ -1,13 +1,23 @@
 package com.board.DemoBoard.domain;
 
 import com.board.DemoBoard.dto.UserForm;
+import lombok.Builder;
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
+
+@Table(name = "user")
+@Builder
 @Entity
 @Getter
-public class User {
+public class User implements UserDetails {
+
     /*
      *
      * @Entity : JPA의 entitiy로 등록이 됩니다.
@@ -38,8 +48,45 @@ public class User {
         this.userName = userForm.getUserName();
         this.password = userForm.getPassword();
     }
-
+    
     public static User createUser(UserForm userForm) {
         return new User(userForm);
+    }
+
+    /* security methods */
+    // 권한 조회
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("user"));
+    }
+
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    // 계정 만료 여부 조회
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // true : 만료되지 않음, false : 만료
+    }
+
+    // 계정 잠금 여부 조회
+    @Override
+    public boolean isAccountNonLocked() {
+        return true; // true : 잠금되지 않음, false : 잠금
+    }
+
+    // 패스워드 만료 여부 조회
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true; // true : 만료되지 않음, false : 만료
+    }
+
+    // 계정 사용 가능 여부 조회
+    @Override
+    public boolean isEnabled() {
+        return false; // true : 사용 불가, false : 사용 가능
     }
 }

@@ -20,6 +20,9 @@ public class Menu {
     @Column(length = 200)
     private String descriptions;
 
+    @Column(length = 1000)
+    private String url;
+
     @Column(columnDefinition = "varchar(1) default 'Y'")
     private String useYn;
 

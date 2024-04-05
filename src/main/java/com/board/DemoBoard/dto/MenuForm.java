@@ -15,4 +15,7 @@ public class MenuForm {
 
     @Size(max = 200, message = "설명은 200자리를 초과할 수 없습니다.")
     private String descriptions;
+
+    @Size(max = 1000, message = "URL은 1000자리를 초과할 수 없습니다.")
+    private String url;
 }
