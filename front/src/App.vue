@@ -1,16 +1,17 @@
-<!--
 <script setup>
-import { RouterView } from "vue-router";
+import HeaderSection from "./components/section/HeaderSection";
+import ContentSection from "./components/section/ContentSection";
 </script>
 
 <template lang="">
-  <RouterView />
+  <HeaderSection />
+  <ContentSection />
 </template>
 <script>
 export default {};
 </script>
 <style lang=""></style>
--->
+<!--
 <template>
   <div id="app">
     <div class="top">
@@ -93,3 +94,4 @@ export default {
   background-color: #efefef;
 }
 </style>
+-->

@@ -116,6 +116,10 @@ const setUserName = (state, userName) => {
   state.userName = userName;
 };
 
+const storedMenuItems = () => {
+  storage.fetchMenus();
+};
+
 export {
   addOneItem,
   removeOneItem,
@@ -124,4 +128,5 @@ export {
   sortTodoLatest,
   sortTodoOldest,
   setUserName,
+  storedMenuItems,
 };

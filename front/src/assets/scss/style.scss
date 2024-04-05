@@ -1,21 +1,21 @@
 @charset "UTF-8";
 
 //setting
-/*
 @import "setting/fonts";
 @import "setting/vars";
 @import "setting/reset";
 @import "setting/mixin";
 @import "setting/common";
-*/
-//section
-/*
-@import "section/header";
-*/
 
+//section
+@import "section/header";
+@import "section/contents";
+
+/*
 @import "../style/common";
 @import "../style/mediaQueries";
 @import "../style/mixins";
 @import "../style/reset";
 @import "../style/svg";
 @import "../style/variables";
+*/

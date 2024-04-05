@@ -10,23 +10,36 @@ const storage = {
     } else if (orderState != null || orderState != "") {
       setState = orderState;
     }
-    console.log(setState);
     await axios2.get("/todos/" + setState).then((res) => {
       const jsonData = res.data;
-      console.log(res);
       if (jsonData.length > 0) {
         for (let i = 0; i < jsonData.length; i++) {
           arr.push(jsonData[i]);
         }
       }
     });
-    store.state.menuItems = arr;
+    store.state.todoItems = arr;
   },
+
   fetchName() {
     if (localStorage.getItem("userName")) {
       const userName = localStorage.getItem("userName");
       return userName;
     }
+  },
+
+  async fetchMenus() {
+    const menus = [];
+
+    await axios2.get("/vue/v1/getMenus").then((res) => {
+      const jsonData = res.data;
+      if (jsonData.length > 0) {
+        for (let i = 0; i < jsonData.length; i++) {
+          menus.push(jsonData[i]);
+        }
+      }
+    });
+    store.state.menuItems = menus;
   },
 };
 

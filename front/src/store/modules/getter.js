@@ -8,4 +8,9 @@ const storedTodoItemsCount = (state, getters) => {
   return getters.storedTodoItems.length;
 };
 
-export { storedTodoItems, storedName, storedTodoItemsCount };
+// menu 불러오기
+const storedMenuItems = (state) => {
+  return state.menuItems;
+};
+
+export { storedTodoItems, storedName, storedTodoItemsCount, storedMenuItems };

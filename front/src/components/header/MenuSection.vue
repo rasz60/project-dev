@@ -1,38 +1,27 @@
 <template lang="">
   <div className="header__menu">
-    <ul>
-      <li v-for="(menus, key) in data" :key="key">menus.title</li>
+    <ul className="menu">
+      <li v-for="menuItem in this.storedMenuItems" v-bind:key="menuItem.title">
+        <router-link
+          v-bind:to="menuItem.url"
+          v-bind:title="menuItem.descriptions"
+          >{{ menuItem.title }}</router-link
+        >
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
-      data: [],
-      id: 1,
-    };
+  name: "menuItems",
+  computed: {
+    ...mapGetters(["storedMenuItems"]),
   },
-  method: {
-    get() {
-      this.$axios
-        .get(
-          "http://localhost:5858/vue/v1/getMenus",
-          {},
-          {
-            header: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((rst) => {
-          console.log("성공", rst);
-        })
-        .catch((err) => {
-          console.log("실패", err);
-        });
-    },
+  mounted() {
+    this.$store.commit("storedMenuItems");
   },
 };
 </script>
