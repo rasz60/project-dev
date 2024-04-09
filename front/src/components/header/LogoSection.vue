@@ -1,6 +1,6 @@
 <template lang="">
   <h1 className="header__logo">
-    <a href="/vue">
+    <a href="/">
       <em>3ik</em>
       <span>Hestia502</span>
     </a>

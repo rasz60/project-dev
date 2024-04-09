@@ -4,68 +4,34 @@ import com.board.DemoBoard.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
-
-@RequiredArgsConstructor
 @Configuration
-public class SecurityConfiguration {
+@RequiredArgsConstructor
+public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F/O*/{
 
     private final UserService userService;
-
-    // 스프링 시큐리티 기능 비활성화
-    @Bean
-    public WebSecurityCustomizer configure(){
-        return (web) -> web.ignoring()
-                .requestMatchers(toH2Console())
-                .requestMatchers(new AntPathRequestMatcher("/static/**"));
-    }
 
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        return http
-                .authorizeRequests() // 인증, 인가 설정
-                .requestMatchers(
-                                    new AntPathRequestMatcher("/login"),
-                                    new AntPathRequestMatcher("/signup"),
-                                    new AntPathRequestMatcher("/user")
-                                ).permitAll()
-                .anyRequest().authenticated()
+        return http.csrf().disable() //csrf 공격 방어 해제,
+                .authorizeRequests() //권한 부여를 위한 메서드
+                .antMatchers("/user/**").authenticated() //인증이 필요한 URI 설정
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .anyRequest().permitAll() // 특정 URL 제외 모두 인가 처리
                 .and()
-                .formLogin() // 폼 기반 로그인 설정
-                .loginPage("/login")
-                .defaultSuccessUrl("/articles")
-                .and()
-                .logout() // 로그아웃 설정
-                .logoutSuccessUrl("/login")
-                .invalidateHttpSession(true)
-                .and()
-                .csrf().disable() // csrf 비활성화 -> 실습을 위해 잠깐 비활성화!!
-                .build();
+                .formLogin() //Security가 지원하는 폼 형식 로그인 방식
+                .loginPage("/login") // 로그인 페이지
+                .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
+                .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
+                .and().build();
     }
 
-    // 인증 관리자 관련 설정
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userDetailService)
-            throws Exception{
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userService) // 사용자 정보 서비스 설정
-                .passwordEncoder(bCryptPasswordEncoder)
-                .and()
-                .build();
-    }
-
-    // 패스워드 인코더로 사용할 빈 등록
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

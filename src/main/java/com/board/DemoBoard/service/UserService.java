@@ -1,15 +1,18 @@
 package com.board.DemoBoard.service;
 
 import com.board.DemoBoard.domain.User;
+import com.board.DemoBoard.dto.MemberDetails;
 import com.board.DemoBoard.dto.UserForm;
 import com.board.DemoBoard.exception.DuplicateEmailException;
 import com.board.DemoBoard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
@@ -20,15 +23,13 @@ public class UserService implements UserDetailsService {
     */
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public Long signUpUser(UserForm userForm) throws Exception {
         validateDuplicateEmail(userForm.getEmail());
         return userRepository.save(User.builder()
                 .email(userForm.getEmail())
-                // 패스워드 암호화
-                .password(bCryptPasswordEncoder.encode(userForm.getPassword()))
+                .password(userForm.getPassword())
                 .build()).getId();
     }
 
@@ -41,9 +42,14 @@ public class UserService implements UserDetailsService {
 
     // 사용자 email로 사용자 정보를 가져오는 메소드
     @Override
-    public User loadUserByUsername(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException((email)));
+    public UserDetails loadUserByUsername(String username) {
+        User user;
+        Optional<User> userOptional= userRepository.findByUsername(username) ;
+        if ( userOptional.isPresent() ) {
+            user = userOptional.get();
+            return new MemberDetails(user);
+        }
+        return null;
     }
 
 }

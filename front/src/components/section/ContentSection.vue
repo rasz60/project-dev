@@ -6,9 +6,21 @@ import { RouterView } from "vue-router";
   <div id="contents-div">
     <div id="topMenu">
       <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
+        <li>
+          <a class="fa" href="/signup">
+            <font-awesome-icon :icon="['fas', 'user-plus']" />
+          </a>
+        </li>
+        <li>
+          <a class="fa" href="/login">
+            <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
+          </a>
+        </li>
+        <li>
+          <a class="fa" href="/logout">
+            <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
+          </a>
+        </li>
       </ul>
     </div>
     <div id="content">
@@ -18,3 +30,4 @@ import { RouterView } from "vue-router";
 </template>
 
 <script></script>
+<style></style>

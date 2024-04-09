@@ -1,8 +1,8 @@
 package com.board.DemoBoard.domain;
 
-import com.board.DemoBoard.dto.UserForm;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,9 +13,9 @@ import java.util.List;
 
 
 @Table(name = "user")
-@Builder
 @Entity
 @Getter
+@Setter
 public class User implements UserDetails {
 
     /*
@@ -36,21 +36,16 @@ public class User implements UserDetails {
     private String email;
 
     @Column(length = 50, nullable = false)
-    private String userName;
+    private String username;
 
     @Column(length = 50, nullable = false)
     private String password;
 
-    public User(){};
-
-    public User(UserForm userForm) {
-        this.email = userForm.getEmail();
-        this.userName = userForm.getUserName();
-        this.password = userForm.getPassword();
-    }
-    
-    public static User createUser(UserForm userForm) {
-        return new User(userForm);
+    @Builder
+    public User(String email, String userName, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
     }
 
     /* security methods */
@@ -63,7 +58,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     // 계정 만료 여부 조회
