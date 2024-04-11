@@ -29,7 +29,6 @@ public class UserService implements UserDetailsService {
         validateDuplicateEmail(userForm.getEmail());
         return userRepository.save(User.builder()
                 .email(userForm.getEmail())
-                .password(userForm.getPassword())
                 .build()).getId();
     }
 

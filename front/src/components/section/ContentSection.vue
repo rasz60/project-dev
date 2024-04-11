@@ -12,7 +12,7 @@ import { RouterView } from "vue-router";
           </a>
         </li>
         <li>
-          <a class="fa" href="/login">
+          <a class="fa" href="/formLogin">
             <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
           </a>
         </li>

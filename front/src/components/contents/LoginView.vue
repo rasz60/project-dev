@@ -20,6 +20,9 @@
       </div>
 
       <div id="login-button-box">
+        <a class="fa" href="">
+          <font-awesome-icon :icon="['fab', 'google']" />
+        </a>
         <a class="fa" href="/loginProc">
           <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
         </a>

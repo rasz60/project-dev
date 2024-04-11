@@ -1,5 +1,6 @@
 package com.board.DemoBoard.domain;
 
+import com.board.DemoBoard.config.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,24 +29,42 @@ public class User implements UserDetails {
      */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
     @Column(length = 50, nullable = false)
     private String email;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = true)
     private String username;
 
-    @Column(length = 50, nullable = false)
-    private String password;
+    @Column
+    private String picture;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
 
     @Builder
-    public User(String email, String userName, String password) {
+    public User(String email, String username, String picture, Role role) {
         this.email = email;
         this.username = username;
-        this.password = password;
+        this.picture = picture;
+        this.role = role;
+    }
+
+
+    public User update(String username, String picture) {
+        this.username = username;
+        this.picture = picture;
+
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
     }
 
     /* security methods */
@@ -53,6 +72,11 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("user"));
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
     }
 
 

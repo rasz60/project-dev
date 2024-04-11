@@ -1,5 +1,6 @@
 package com.board.DemoBoard.config;
 
+import com.board.DemoBoard.service.CustomOAuth2UserService;
 import com.board.DemoBoard.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -13,21 +14,49 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F/O*/{
 
     private final UserService userService;
-
+    private final CustomOAuth2UserService customOAuth2UserService;
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        return http.csrf().disable() //csrf 공격 방어 해제,
+        http
+            .csrf().disable() //csrf 공격 방어 해제,
+            .headers().frameOptions().disable() // h2-console 화면 사용을 위한 옵션
+            .and()
+                // 권한 설정
                 .authorizeRequests() //권한 부여를 위한 메서드
-                .antMatchers("/user/**").authenticated() //인증이 필요한 URI 설정
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .anyRequest().permitAll() // 특정 URL 제외 모두 인가 처리
-                .and()
+
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/login/**", "/loginProc", "/oauth2/**").permitAll()
+                    .antMatchers().permitAll()
+                    .antMatchers("/vue/css/**", "/vue/images/**", "**.mjs", "/vue/js/**","/vue/h2-console/**").permitAll()
+
+                    .anyRequest().authenticated()
+
+            .and()
+                // form 로그인 설정
                 .formLogin() //Security가 지원하는 폼 형식 로그인 방식
-                .loginPage("/login") // 로그인 페이지
-                .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
-                .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
-                .and().build();
+                    .loginPage("/login") // 로그인 페이지
+                    .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
+                    .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
+            .and() 
+                //로그아웃 설정
+                .logout()
+                    .logoutSuccessUrl("/")
+                
+            .and()
+                // oauth 설정
+                .oauth2Login()
+                    .loginPage("/login")
+                    .authorizationEndpoint() // 인증 엔드포인트 설정
+                        .baseUri("/oauth2/authorize") // OAuth 2.0 인증 엔드포인트
+                    .and()
+                    .redirectionEndpoint() // 리디렉션 엔드포인트 설정
+                        .baseUri("/login/oauth2/code/*") // OAuth 2.0 인증 완료 후 리디렉션할 경로
+                    .and()
+                    .userInfoEndpoint()
+                        .userService(customOAuth2UserService);
+
+        return http.build();
     }
 
     @Bean

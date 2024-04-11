@@ -15,3 +15,6 @@ spring :
     hibernate:
         format_sql: true
         ddl-auto: update
+
+  profiles:
+    include: oauth
