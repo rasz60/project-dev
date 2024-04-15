@@ -19,14 +19,14 @@ import java.util.List;
 public class MenuController {
 
     private final MenuService menuService;
-    @GetMapping(value = "/vue/v1/getMenus")
+    @GetMapping(value = "/api/v1/getMenus")
     public List<Menu> getMenus () throws Exception {
         log.info("[GET] Menu List");
 
         return menuService.getMenus();
     }
 
-    @PostMapping(value = "/vue/v1/createMenus")
+    @PostMapping(value = "/api/v1/createMenus")
     public void createMenu(@RequestBody @Valid MenuForm menuForm) throws Exception {
         menuService.createMenu(menuForm);
     }

@@ -17,7 +17,7 @@ const router = createRouter({
       component: MoneyReports,
     },
     {
-      path: "/login",
+      path: "/formLogin",
       name: "login",
       component: LoginView,
     },

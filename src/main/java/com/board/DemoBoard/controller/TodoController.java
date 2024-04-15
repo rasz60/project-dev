@@ -22,7 +22,7 @@ public class TodoController {
     private final TodoService todoService;
 
     // Todo 등록
-    @PostMapping("/todos/save")
+    @PostMapping("/api/v1/todos/save")
     public String createJsonTodo(@RequestBody @Valid TodoForm form, BindingResult bindingResult){
         log.info("Post : Todo Save");
 
@@ -30,7 +30,7 @@ public class TodoController {
     }
 
     // Todo 목록
-    @GetMapping("/todos/{orderState}")
+    @GetMapping("/api/v1/todos/{orderState}")
     public List<Todo> list(@PathVariable("orderState") Boolean orderState){
         log.info("Get : Todos List");
 
@@ -38,7 +38,7 @@ public class TodoController {
     }
 
     // Todo 완료 상태 업데이트
-    @PutMapping("/todos/{id}")
+    @PutMapping("/api/v1/todos/{id}")
     public String updateTodo(
             @PathVariable("id") Long id,
             @RequestBody UpdateTodoRequest request
@@ -57,7 +57,7 @@ public class TodoController {
     }
 
     // Todo 삭제(DB 업데이트)
-    @PutMapping("/todos/delete/{id}")
+    @PutMapping("/api/v1/todos/delete/{id}")
     public String deleteTodo(
             @PathVariable("id") Long id
     ){
@@ -74,7 +74,7 @@ public class TodoController {
         }
     }
 
-    @PutMapping("/todos/clear")
+    @PutMapping("/api/v1/todos/clear")
     public String clearAllTodo(){
         log.info("Clear : Todo All Clear");
 

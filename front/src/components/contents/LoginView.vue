@@ -2,7 +2,7 @@
 
 <template lang="">
   <div class="login-box">
-    <form action="/loginProc">
+    <form action="/loginProc" id="loginForm" method="post">
       <div>
         <label for="username">아이디</label>
       </div>
@@ -20,10 +20,10 @@
       </div>
 
       <div id="login-button-box">
-        <a class="fa" href="">
+        <a class="fa" href="/oauth2">
           <font-awesome-icon :icon="['fab', 'google']" />
         </a>
-        <a class="fa" href="/loginProc">
+        <a class="fa" href="#" v-on:click="loginFrmSubmit()">
           <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
         </a>
       </div>
@@ -31,5 +31,16 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapMutations } from "vuex";
+
+export default {
+  name: "loginFrmsubmit",
+  methods: {
+    ...mapMutations({
+      loginFrmSubmit: "loginFrmSubmit",
+    }),
+  },
+};
+</script>
 <style></style>

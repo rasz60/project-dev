@@ -48,18 +48,20 @@ const addOneItem = async (state, todoItem) => {
     completed: false,
   };
 
-  await axios3.post("/todos/save", JSON.stringify(jsonValue)).then((res) => {
-    if (res.data == "ok") {
-      storage.fetch(state.todoOldestOrder);
-    } else {
-      alert("등록 실패");
-    }
-  });
+  await axios3
+    .post("/api/v1/todos/save", JSON.stringify(jsonValue))
+    .then((res) => {
+      if (res.data == "ok") {
+        storage.fetch(state.todoOldestOrder);
+      } else {
+        alert("등록 실패");
+      }
+    });
 };
 // 아이템 하나 삭제
 const removeOneItem = (state, payload) => {
   /* 서버 통신 */
-  axios3.put("/todos/delete/" + payload.todoItem.id).then((res) => {
+  axios3.put("/api/v1/todos/delete/" + payload.todoItem.id).then((res) => {
     if (res.data == "ok") {
       storage.fetch(state.todoOldestOrder);
     } else {
@@ -76,7 +78,7 @@ const toggleOneItem = (state, payload) => {
   };
 
   axios3
-    .put("/todos/" + payload.todoItem.id, JSON.stringify(jsonValue))
+    .put("api/v1/todos/" + payload.todoItem.id, JSON.stringify(jsonValue))
     .then((res) => {
       if (res.data == "ok") {
         storage.fetch(state.todoOldestOrder);
@@ -89,7 +91,7 @@ const toggleOneItem = (state, payload) => {
 const clearAllItem = (state) => {
   var todoItems = state.todoItems;
   if (todoItems.length > 0) {
-    axios3.put("/todos/clear").then((res) => {
+    axios3.put("api/v1/todos/clear").then((res) => {
       if (res.data == "ok") {
         storage.fetch(state.todoOldestOrder);
       } else {
@@ -120,6 +122,12 @@ const storedMenuItems = () => {
   storage.fetchMenus();
 };
 
+const loginFrmSubmit = () => {
+  console.log("v-on:click=login");
+  var frm = document.getElementById("loginForm");
+  frm.submit();
+};
+
 export {
   addOneItem,
   removeOneItem,
@@ -129,4 +137,5 @@ export {
   sortTodoOldest,
   setUserName,
   storedMenuItems,
+  loginFrmSubmit,
 };

@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    // 사용자 email로 사용자 정보를 가져오는 메소드
+    // 사용자 username로 사용자 정보를 가져오는 메소드
     @Override
     public UserDetails loadUserByUsername(String username) {
         User user;

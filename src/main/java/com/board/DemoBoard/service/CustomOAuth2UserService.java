@@ -5,6 +5,7 @@ import com.board.DemoBoard.dto.OAuthAttributes;
 import com.board.DemoBoard.dto.SessionUser;
 import com.board.DemoBoard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -19,6 +20,7 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
     private final HttpSession httpSession;
@@ -27,6 +29,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
+
+        log.info("userReqeust : " + userRequest.getClientRegistration());
+        log.info("userReqeust : " + userRequest.getAccessToken().getTokenValue());
+        log.info("userReqeust : " + userRequest.getClientRegistration());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest.getClientRegistration()

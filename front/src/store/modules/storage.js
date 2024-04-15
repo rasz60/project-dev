@@ -10,7 +10,7 @@ const storage = {
     } else if (orderState != null || orderState != "") {
       setState = orderState;
     }
-    await axios2.get("/todos/" + setState).then((res) => {
+    await axios2.get("api/v1/todos/" + setState).then((res) => {
       const jsonData = res.data;
       if (jsonData.length > 0) {
         for (let i = 0; i < jsonData.length; i++) {
@@ -31,7 +31,7 @@ const storage = {
   async fetchMenus() {
     const menus = [];
 
-    await axios2.get("/vue/v1/getMenus").then((res) => {
+    await axios2.get("/api/v1/getMenus").then((res) => {
       const jsonData = res.data;
       if (jsonData.length > 0) {
         for (let i = 0; i < jsonData.length; i++) {

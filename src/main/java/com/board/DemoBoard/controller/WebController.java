@@ -35,8 +35,9 @@ public class WebController {
         return "vue/index";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/formLogin")
     public String login() { return "vue/index"; }
+
 
     @PostMapping("/joinProc")
     public String joinProc(User user) {
