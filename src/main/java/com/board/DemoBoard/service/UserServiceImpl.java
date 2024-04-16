@@ -31,12 +31,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Transactional
     public Long signUpUser(UserForm userForm) throws Exception {
         validateDuplicateEmail(userForm.getEmail());
-        log.info(bCryptPasswordEncoder.encode(userForm.getPassword()));
 
+        log.info(
+                "userForm.getEmail() : " + userForm.getEmail() + "\n" +
+                "userForm.getUserName() : " + userForm.getUserName() + "\n" +
+                "userForm.getPassWord() : " + userForm.getPassword() + "\n" +
+                "userForm.getRole() : " + userForm.getRole()
+        );
         return userRepository.save(User.builder()
                 .email(userForm.getEmail())
                 // 패스워드 암호화
                 .password(bCryptPasswordEncoder.encode(userForm.getPassword()))
+                .userName(userForm.getUserName())
+                .role(userForm.getRole())
                 .build()).getId();
     }
 
@@ -49,9 +56,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     // 사용자 username로 사용자 정보를 가져오는 메소드
     @Override
-    public UserDetails loadUserByUsername(String username) {
+    public UserDetails loadUserByUsername(String userName) {
         User user;
-        Optional<User> userOptional= userRepository.findByUsername(username) ;
+        Optional<User> userOptional= userRepository.findByUserName(userName) ;
         log.info("userOptional.isPresent()");
         if ( userOptional.isPresent() ) {
             user = userOptional.get();

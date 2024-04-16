@@ -29,7 +29,7 @@ public class User implements UserDetails {
      */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
 
@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(length = 50, nullable = true)
-    private String username;
+    private String userName;
 
     @Column(length = 255, nullable = false)
     private String password;
@@ -53,17 +53,17 @@ public class User implements UserDetails {
 
 
     @Builder
-    public User(String email, String username, String password, String picture, Role role) {
+    public User(String email, String userName, String password, String picture, Role role) {
         this.email = email;
-        this.username = username;
+        this.userName = userName;
         this.password = password;
         this.picture = picture;
         this.role = role;
     }
 
 
-    public User update(String username, String picture) {
-        this.username = username;
+    public User update(String userName, String picture) {
+        this.userName = userName;
         this.picture = picture;
 
         return this;
@@ -82,13 +82,13 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
 
     @Override
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     // 계정 만료 여부 조회

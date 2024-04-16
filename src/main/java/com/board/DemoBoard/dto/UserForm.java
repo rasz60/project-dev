@@ -36,7 +36,7 @@ public class UserForm {
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.role = Role.GUEST;
+        this.role = Role.USER;
     }
 
 }
