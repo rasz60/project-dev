@@ -123,7 +123,6 @@ const storedMenuItems = () => {
 };
 
 const loginFrmSubmit = () => {
-  console.log("v-on:click=login");
   var frm = document.getElementById("loginForm");
   frm.submit();
 };

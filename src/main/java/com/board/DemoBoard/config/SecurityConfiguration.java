@@ -1,19 +1,18 @@
 package com.board.DemoBoard.config;
 
 import com.board.DemoBoard.service.CustomOAuth2UserService;
-import com.board.DemoBoard.service.UserService;
+import com.board.DemoBoard.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F/O*/{
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     private final CustomOAuth2UserService customOAuth2UserService;
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
     @Bean
@@ -26,8 +25,11 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                 .authorizeRequests() //권한 부여를 위한 메서드
                     .antMatchers( "/"
                                             ,"/api/**"
+                                            ,"/signup"
+                                            ,"/signup/**"
                                             ,"/formLogin"
                                             ,"/loginProc"
+                                            ,"/oauth2/**"
                                             ,"/error"
                                             ,"/login/**"
                                             ,"/loginProc"
@@ -35,8 +37,9 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                                             ,"/vue/images/**"
                                             ,"/vue/js/**"
                                             ,"/vue/h2-console/**"
+                                            ,"/swagger-ui.html"
                                 ).permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
 
             .and()
 
@@ -53,20 +56,18 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                 // oauth 설정
                 .oauth2Login()
                     .loginPage("/formLogin")
-                    .authorizationEndpoint() // 인증 엔드포인트 설정
+                /*
+                .authorizationEndpoint() // 인증 엔드포인트 설정
                         .baseUri("/oauth2/authorize") // OAuth 2.0 인증 엔드포인트
                     .and()
                     .redirectionEndpoint() // 리디렉션 엔드포인트 설정
                         .baseUri("/oauth2/code/*") // OAuth 2.0 인증 완료 후 리디렉션할 경로
-                .and()
+                .and()*/
                     .userInfoEndpoint()
                         .userService(customOAuth2UserService);
 
         return http.build();
     }
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 }

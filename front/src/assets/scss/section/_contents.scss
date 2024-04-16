@@ -33,16 +33,7 @@
     padding: 20px;
     justify-content: center;
 
-    div.login-box {
-      padding-top: 100px;
-      width: 30%;
-    }
-
-    div.login-box div {
-      padding: 10px;
-    }
-
-    div.login-box div input {
+    input {
       width: 100%;
       height: 30px;
       border: none;
@@ -63,24 +54,66 @@
       transition: background-color 5000s ease-in-out 0s;
     }
 
-    div#login-button-box {
-      display: flex;
-      justify-content: end;
-      width: 100%;
+    div.login-box {
+      padding-top: 100px;
+      width: 30%;
+
+      div {
+        padding: 10px;
+      }
+
+      div#login-button-box {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+      }
+
+      a.fa {
+        text-align: left;
+        color: white;
+        font-size: 23px;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      a.fa:hover {
+        font-size: 25px;
+        font-weight: 700;
+        transition: all 200ms;
+      }
     }
 
-    a.fa {
-      text-align: left;
-      color: white;
-      font-size: 23px;
-      padding: 5px;
-      cursor: pointer;
-    }
+    div.signin-box {
+      padding-top: 30px;
+      width: 80%;
 
-    a.fa:hover {
-      font-size: 25px;
-      font-weight: 700;
-      transition: all 200ms;
+      div {
+        padding: 10px;
+      }
+
+      div#signin-button-box {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        button.fa,
+        a.fa {
+          text-align: left;
+          color: white;
+          background-color: transparent;
+          border: none;
+          font-size: 30px;
+          padding: 5px;
+          cursor: pointer;
+        }
+
+        button.fa:hover,
+        a.fa:hover {
+          font-size: 32px;
+          font-weight: 700;
+          transition: all 200ms;
+        }
+      }
     }
   }
 }

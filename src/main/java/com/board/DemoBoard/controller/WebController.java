@@ -38,6 +38,8 @@ public class WebController {
     @GetMapping("/formLogin")
     public String login() { return "vue/index"; }
 
+    @GetMapping("/signin")
+    public String signin() { return "vue/index"; }
 
     @PostMapping("/joinProc")
     public String joinProc(User user) {

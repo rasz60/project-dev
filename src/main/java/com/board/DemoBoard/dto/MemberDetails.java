@@ -2,12 +2,15 @@ package com.board.DemoBoard.dto;
 
 import com.board.DemoBoard.domain.User;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
+@Slf4j
 public class MemberDetails implements UserDetails {
     private final User user;
 
@@ -17,36 +20,41 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> collect = new ArrayList<>();
+        collect.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return user.getUsername();
+            }
+        });
+        return collect;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
+    public boolean isCredentialsNonExpired() { return true; }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

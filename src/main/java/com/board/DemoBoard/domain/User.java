@@ -39,6 +39,9 @@ public class User implements UserDetails {
     @Column(length = 50, nullable = true)
     private String username;
 
+    @Column(length = 255, nullable = false)
+    private String password;
+
     @Column
     private String picture;
 
@@ -46,11 +49,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Role role;
 
+    public User() {}
+
 
     @Builder
-    public User(String email, String username, String picture, Role role) {
+    public User(String email, String username, String password, String picture, Role role) {
         this.email = email;
         this.username = username;
+        this.password = password;
         this.picture = picture;
         this.role = role;
     }

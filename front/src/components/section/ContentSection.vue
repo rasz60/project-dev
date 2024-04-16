@@ -7,7 +7,7 @@ import { RouterView } from "vue-router";
     <div id="topMenu">
       <ul>
         <li>
-          <a class="fa" href="/signup">
+          <a class="fa" href="/signin">
             <font-awesome-icon :icon="['fas', 'user-plus']" />
           </a>
         </li>

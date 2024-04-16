@@ -20,7 +20,7 @@
       </div>
 
       <div id="login-button-box">
-        <a class="fa" href="/oauth2">
+        <a class="fa" href="/oauth2/authorization/google">
           <font-awesome-icon :icon="['fab', 'google']" />
         </a>
         <a class="fa" href="#" v-on:click="loginFrmSubmit()">

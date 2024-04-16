@@ -1,5 +1,6 @@
 package com.board.DemoBoard.dto;
 
+import com.board.DemoBoard.config.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,5 +24,19 @@ public class UserForm {
     @NotEmpty(message = "이름은 필수 입니다.")
     @Size(max = 20, message = "이름은 20자리를 초과할 수 없습니다.")
     private String userName;
+
+    @NotEmpty(message = "비밀번호는 필수 입니다.")
+    @Size(max = 1000, message = "비밀번호는 1000자리를 초과할 수 없습니다.")
+    private String password;
+
+    private Role role;
+    public UserForm() {}
+
+    public UserForm(String userName, String password, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.role = Role.GUEST;
+    }
 
 }
