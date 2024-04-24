@@ -41,6 +41,21 @@ const storage = {
     });
     store.state.menuItems = menus;
   },
+  /*
+  getLoginInfo() {
+    const loginInfo = {};
+
+    axios2.get("/api/v1/loginInfo").then((res) => {
+      const jsonData = res.data;
+      if (jsonData.length > 0) {
+        for (let i = 0; i < jsonData.length; i++) {
+          console.log(jsonData[i]);
+        }
+      }
+    });
+    store.state.loginInfo = loginInfo;
+  },
+*/
 };
 
 export default storage;

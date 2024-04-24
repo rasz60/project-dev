@@ -30,10 +30,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-        log.info("userReqeust : " + userRequest.getClientRegistration());
-        log.info("userReqeust : " + userRequest.getAccessToken().getTokenValue());
-        log.info("userReqeust : " + userRequest.getClientRegistration());
-
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest.getClientRegistration()
                                                     .getProviderDetails()
@@ -41,7 +37,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                                                     .getUserNameAttributeName();
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-
         User user = saveOrUpdate(attributes);
 
         httpSession.setAttribute("user", new SessionUser(user));

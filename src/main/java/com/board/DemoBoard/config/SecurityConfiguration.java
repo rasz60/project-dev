@@ -25,8 +25,8 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                 .authorizeRequests() //권한 부여를 위한 메서드
                     .antMatchers( "/"
                                             ,"/api/**"
-                                            ,"/signup"
-                                            ,"/signup/**"
+                                            ,"/signin"
+                                            ,"/signin/**"
                                             ,"/formLogin"
                                             ,"/loginProc"
                                             ,"/oauth2/**"
@@ -39,33 +39,34 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                                             ,"/vue/h2-console/**"
                                             ,"/swagger-ui.html"
                                 ).permitAll()
-                    .anyRequest().permitAll()
+                    .anyRequest().authenticated()
 
             .and()
-
                 // form 로그인 설정
                 .formLogin() //Security가 지원하는 폼 형식 로그인 방식
                     .loginPage("/formLogin") // 로그인 페이지
+                    .usernameParameter("userName")
+                    .passwordParameter("password")
                     .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
                     .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
-            .and() 
+            .and()
                 //로그아웃 설정
                 .logout()
                     .logoutSuccessUrl("/")
+                ;
+            /*
+            // google 소셜로그인은 차후
             .and()
                 // oauth 설정
                 .oauth2Login()
-                    .loginPage("/formLogin")
-                /*
                 .authorizationEndpoint() // 인증 엔드포인트 설정
-                        .baseUri("/oauth2/authorize") // OAuth 2.0 인증 엔드포인트
-                    .and()
-                    .redirectionEndpoint() // 리디렉션 엔드포인트 설정
-                        .baseUri("/oauth2/code/*") // OAuth 2.0 인증 완료 후 리디렉션할 경로
-                .and()*/
+                .and()
+                    .redirectionEndpoint()
+                        .baseUri("/formLogin")// 리디렉션 엔드포인트 설정
+                .and()
                     .userInfoEndpoint()
                         .userService(customOAuth2UserService);
-
+            */
         return http.build();
     }
 

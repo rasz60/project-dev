@@ -5,6 +5,24 @@
   padding: 20px;
   align-content: baseline;
 
+  button.fa,
+  a.fa {
+    text-align: left;
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  button.fa:hover,
+  a.fa:hover {
+    font-weight: 700;
+    transition: all 200ms;
+  }
+
   #topMenu {
     display: flex;
     justify-content: flex-end;
@@ -19,9 +37,14 @@
       li {
         margin: 5px;
 
+        button.fa,
         a.fa {
           font-size: 18px;
-          padding: 5px;
+        }
+
+        button.fa:hover,
+        a.fa:hover {
+          font-size: 19px;
         }
       }
     }
@@ -69,17 +92,12 @@
       }
 
       a.fa {
-        text-align: left;
-        color: white;
         font-size: 23px;
-        padding: 5px;
         cursor: pointer;
       }
 
       a.fa:hover {
         font-size: 25px;
-        font-weight: 700;
-        transition: all 200ms;
       }
     }
 
@@ -95,24 +113,6 @@
         display: flex;
         justify-content: center;
         width: 100%;
-
-        button.fa,
-        a.fa {
-          text-align: left;
-          color: white;
-          background-color: transparent;
-          border: none;
-          font-size: 30px;
-          padding: 5px;
-          cursor: pointer;
-        }
-
-        button.fa:hover,
-        a.fa:hover {
-          font-size: 32px;
-          font-weight: 700;
-          transition: all 200ms;
-        }
       }
     }
   }

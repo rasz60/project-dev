@@ -39,6 +39,9 @@ public class User implements UserDetails {
     @Column(length = 50, nullable = true)
     private String userName;
 
+    @Column(length = 50, nullable = true)
+    private String realName;
+
     @Column(length = 255, nullable = false)
     private String password;
 
@@ -53,17 +56,18 @@ public class User implements UserDetails {
 
 
     @Builder
-    public User(String email, String userName, String password, String picture, Role role) {
+    public User(String email, String userName, String realName, String password, String picture, Role role) {
         this.email = email;
         this.userName = userName;
+        this.realName = realName;
         this.password = password;
         this.picture = picture;
         this.role = role;
     }
 
 
-    public User update(String userName, String picture) {
-        this.userName = userName;
+    public User update(String realName, String picture) {
+        this.realName = realName;
         this.picture = picture;
 
         return this;

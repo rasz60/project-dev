@@ -57,9 +57,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     // 사용자 username로 사용자 정보를 가져오는 메소드
     @Override
     public UserDetails loadUserByUsername(String userName) {
+        log.info("userName : " + userName);
         User user;
         Optional<User> userOptional= userRepository.findByUserName(userName) ;
-        log.info("userOptional.isPresent()");
+        log.info("userOptional.isPresent(" + userName + ") ? " + userOptional.isPresent());
         if ( userOptional.isPresent() ) {
             user = userOptional.get();
             log.info("userInfo : " + user.getUsername());

@@ -123,9 +123,32 @@ const storedMenuItems = () => {
 };
 
 const loginFrmSubmit = () => {
-  var frm = document.getElementById("loginForm");
-  frm.submit();
+  var userName = document.querySelector('input[name="userName"]').value;
+  var password = document.querySelector('input[name="password"]').value;
+
+  const jsonValue = {
+    userName: userName,
+    password: password,
+  };
+
+  axios3.post("/loginProc", JSON.stringify(jsonValue)).then((res) => {
+    console.log(res.data);
+  });
 };
+
+/*
+
+  await axios3
+    .post("/api/v1/todos/save", JSON.stringify(jsonValue))
+    .then((res) => {
+      if (res.data == "ok") {
+        storage.fetch(state.todoOldestOrder);
+      } else {
+        alert("등록 실패");
+      }
+    });
+
+*/
 
 export {
   addOneItem,
