@@ -1,7 +1,6 @@
 package com.board.DemoBoard.controller;
 
 import com.board.DemoBoard.domain.User;
-import com.board.DemoBoard.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +24,7 @@ public class WebController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final HttpSession httpSession;
     @GetMapping("/")
-    public String index(Model model) {
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
-
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
-
-        return "vue/index";
-    }
+    public String index(Model model) { return "vue/index"; }
 
     @GetMapping("/formLogin")
     public String login(HttpServletRequest request, Model model) {
@@ -43,11 +33,10 @@ public class WebController {
         if (error != null) {
             model.addAttribute("loginError", "loginError");
         }
-
         return "vue/index";
     }
 
-    @GetMapping("/signin")
+    @GetMapping("/signup")
     public String signin() { return "vue/index"; }
 
     @PostMapping("/joinProc")

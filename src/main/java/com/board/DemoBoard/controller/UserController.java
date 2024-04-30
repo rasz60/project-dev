@@ -17,7 +17,10 @@ public class UserController {
 
     private final UserServiceImpl userServiceImpl;
 
-    @PostMapping("/signin/join")
+
+
+
+    @PostMapping("/signup/join")
     public String signUpUser(@RequestParam String userName, @RequestParam String password, @RequestParam String email) throws Exception {
         @Valid
         UserForm userForm = new UserForm(userName, password, email);

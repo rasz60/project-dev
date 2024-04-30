@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../components/contents/HomeView";
 import MoneyReports from "../components/contents/MoneyReports";
 import LoginView from "../components/contents/LoginView";
-import SigninView from "../components/contents/SigninView";
+import SignupView from "../components/contents/SignupView";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,9 +23,9 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: "/signin",
-      name: "signin",
-      component: SigninView,
+      path: "/signup",
+      name: "signup",
+      component: SignupView,
     },
   ],
 });

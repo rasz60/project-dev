@@ -41,21 +41,20 @@ const storage = {
     });
     store.state.menuItems = menus;
   },
-  /*
-  getLoginInfo() {
-    const loginInfo = {};
-
-    axios2.get("/api/v1/loginInfo").then((res) => {
+  async getLoginInfo() {
+    const loginInfo = {
+      username: "",
+    };
+    console.log("getLoginInfo");
+    await axios2.get("/api/v1/loginInfo/").then((res) => {
       const jsonData = res.data;
-      if (jsonData.length > 0) {
-        for (let i = 0; i < jsonData.length; i++) {
-          console.log(jsonData[i]);
-        }
+
+      if (jsonData != null) {
+        loginInfo.username = jsonData.username;
       }
     });
     store.state.loginInfo = loginInfo;
   },
-*/
 };
 
 export default storage;

@@ -12,15 +12,15 @@ const storedTodoItemsCount = (state, getters) => {
 const storedMenuItems = (state) => {
   return state.menuItems;
 };
-/*
+
 const storedLoginInfo = (state) => {
   return state.loginInfo;
 };
-*/
+
 export {
   storedTodoItems,
   storedName,
   storedTodoItemsCount,
   storedMenuItems,
-  //storedLoginInfo,
+  storedLoginInfo,
 };

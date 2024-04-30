@@ -7,17 +7,29 @@ import { RouterView } from "vue-router";
     <div id="topMenu">
       <ul>
         <li>
-          <a class="fa" href="/signin">
+          <a
+            class="fa"
+            href="/signup"
+            v-if="this.storedLoginInfo.username == null"
+          >
             <font-awesome-icon :icon="['fas', 'user-plus']" />
           </a>
         </li>
         <li>
-          <a class="fa" href="/formLogin">
+          <a
+            class="fa"
+            href="/formLogin"
+            v-if="this.storedLoginInfo.username == null"
+          >
             <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
           </a>
         </li>
         <li>
-          <a class="fa" href="/logout">
+          <a
+            class="fa"
+            href="/logout"
+            v-if="this.storedLoginInfo.username != null"
+          >
             <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
           </a>
         </li>
@@ -29,5 +41,17 @@ import { RouterView } from "vue-router";
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  name: "loginInfo",
+  computed: {
+    ...mapGetters(["storedLoginInfo"]),
+  },
+  mounted() {
+    this.$store.commit("storedLoginInfo");
+  },
+};
+</script>
 <style></style>

@@ -1,8 +1,8 @@
 <script setup></script>
 
 <template lang="">
-  <div class="signin-box">
-    <form action="/signin/join" method="post">
+  <div class="signup-box">
+    <form action="/signup/join" method="post">
       <div>
         <label for="username">아이디</label>
       </div>
@@ -32,7 +32,7 @@
         />
       </div>
 
-      <div id="signin-button-box">
+      <div id="signup-button-box">
         <button type="submit" class="fa fa-check" title="가입하기">
           <font-awesome-icon :icon="['fas', 'square-check']" />
         </button>

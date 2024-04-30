@@ -25,14 +25,14 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                 .authorizeRequests() //권한 부여를 위한 메서드
                     .antMatchers( "/"
                                             ,"/api/**"
-                                            ,"/signin"
-                                            ,"/signin/**"
+                                            ,"/signup"
+                                            ,"/signup/**"
                                             ,"/formLogin"
                                             ,"/loginProc"
                                             ,"/oauth2/**"
                                             ,"/error"
+                                            ,"/login"
                                             ,"/login/**"
-                                            ,"/loginProc"
                                             ,"/vue/css/**"
                                             ,"/vue/images/**"
                                             ,"/vue/js/**"
@@ -40,15 +40,14 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                                             ,"/swagger-ui.html"
                                 ).permitAll()
                     .anyRequest().authenticated()
-
             .and()
                 // form 로그인 설정
                 .formLogin() //Security가 지원하는 폼 형식 로그인 방식
-                    .loginPage("/formLogin") // 로그인 페이지
-                    .usernameParameter("userName")
-                    .passwordParameter("password")
-                    .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
-                    .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
+                .loginPage("/formLogin") // 로그인 페이지
+                .usernameParameter("userName")
+                .passwordParameter("password")
+                .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
+                .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
             .and()
                 //로그아웃 설정
                 .logout()

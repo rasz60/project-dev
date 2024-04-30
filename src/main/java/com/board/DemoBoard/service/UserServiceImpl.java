@@ -2,6 +2,7 @@ package com.board.DemoBoard.service;
 
 import com.board.DemoBoard.domain.User;
 import com.board.DemoBoard.dto.MemberDetails;
+import com.board.DemoBoard.dto.SessionUser;
 import com.board.DemoBoard.dto.UserForm;
 import com.board.DemoBoard.exception.DuplicateEmailException;
 import com.board.DemoBoard.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final HttpSession httpSession;
 
     @Transactional
     public Long signUpUser(UserForm userForm) throws Exception {
@@ -63,7 +66,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         log.info("userOptional.isPresent(" + userName + ") ? " + userOptional.isPresent());
         if ( userOptional.isPresent() ) {
             user = userOptional.get();
-            log.info("userInfo : " + user.getUsername());
+
+            httpSession.setAttribute("user", new SessionUser(user));
+
             return new MemberDetails(user);
         }
         return null;

@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="login-box">
+  <form class="login-box" method="post" action="/loginProc">
     <div>
       <label for="username">아이디</label>
     </div>
@@ -26,15 +26,14 @@
         <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
       </a>
     </div>
-    error : {{ error }}
-  </div>
+  </form>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
 
 var url = window.location.href;
-
+var loginStatus = false;
 if (url.indexOf("?") > 0) {
   var query = url.substring(url.indexOf("?") + 1);
 
@@ -51,7 +50,7 @@ export default {
       loginError: false,
       user: "",
       password: "",
-      error: false,
+      error: loginStatus,
     };
   },
   methods: {
