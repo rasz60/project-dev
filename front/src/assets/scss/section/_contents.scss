@@ -107,16 +107,51 @@
 
       form {
         padding: 10px;
-      }
 
-      #signup-button-box {
-        display: flex;
-        justify-content: center;
-        width: 100%;
+        input#username {
+          width: 91.5%;
+        }
 
-        button.fa,
-        a.fa {
-          font-size: 26px;
+        a.usernameChk {
+          display: inline-block;
+          width: 7%;
+          padding: 0.5%;
+          margin-left: 1.5%;
+          text-align: center;
+          border: 1px solid white;
+          border-radius: 4px;
+        }
+
+        a.usernameChk.chkd {
+          display: inline-block;
+          width: 7%;
+          padding: 0.5%;
+          margin-left: 1.5%;
+          text-align: center;
+          border: 1px solid white;
+          border-radius: 4px;
+        }
+
+        a.usernameChk:hover {
+          cursor: pointer;
+          background-color: white;
+          color: black;
+          font-weight: 800;
+        }
+
+        div {
+          padding: 10px;
+        }
+
+        #signup-button-box {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+
+          button.fa,
+          a.fa {
+            font-size: 26px;
+          }
         }
       }
     }

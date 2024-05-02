@@ -33,16 +33,13 @@ import { RouterView } from "vue-router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "loginInfo",
   computed: {
     ...mapGetters(["storedLoginInfo"]),
     loginChk() {
       return this.storedLoginInfo.username == null;
     },
   },
-  mounted() {
-    this.$store.commit("storedLoginInfo");
-  },
+  methods: {},
 };
 </script>
 <style></style>

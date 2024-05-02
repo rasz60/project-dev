@@ -9,17 +9,4 @@ import MenuSection from "../header/MenuSection";
     <MenuSection />
   </header>
 </template>
-<script>
-import { mapGetters } from "vuex";
-
-export default {
-  name: "loginInfo",
-  computed: {
-    ...mapGetters(["storedLoginInfo"]),
-  },
-  mounted() {
-    this.$store.commit("storedLoginInfo");
-  },
-};
-</script>
 <style lang=""></style>

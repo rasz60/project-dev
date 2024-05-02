@@ -4,7 +4,6 @@ const storage = {
   async fetch(orderState) {
     var setState = true;
     const arr = [];
-
     if (orderState == undefined || orderState == null) {
       setState = true;
     } else if (orderState != null || orderState != "") {
@@ -45,7 +44,7 @@ const storage = {
     const loginInfo = {
       username: "",
     };
-    console.log("getLoginInfo");
+
     await axios2.get("/api/v1/loginInfo/").then((res) => {
       const jsonData = res.data;
 

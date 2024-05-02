@@ -124,11 +124,14 @@ const storedMenuItems = () => {
 
 const loginFrmSubmit = () => {
   var frm = document.querySelector("form.login-box");
-  frm.submit();
+
+  var password = frm.password.value;
+  console.log(password);
+
+  //frm.submit();
 };
 
 const storedLoginInfo = () => {
-  console.log("storedLoginInfo");
   storage.getLoginInfo();
 };
 

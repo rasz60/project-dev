@@ -20,8 +20,5 @@ export default {
   computed: {
     ...mapGetters(["storedMenuItems"]),
   },
-  mounted() {
-    this.$store.commit("storedMenuItems");
-  },
 };
 </script>

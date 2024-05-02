@@ -26,11 +26,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      "storedTodoItems",
-      "storedTodoItemsCount",
-      "storedMenuItems",
-    ]),
+    ...mapGetters(["storedTodoItems", "storedTodoItemsCount"]),
   },
   methods: {
     addTodoItem() {
