@@ -7,29 +7,17 @@ import { RouterView } from "vue-router";
     <div id="topMenu">
       <ul>
         <li>
-          <a
-            class="fa"
-            href="/signup"
-            v-if="this.storedLoginInfo.username == null"
-          >
+          <a class="fa" href="/signup" v-if="loginChk">
             <font-awesome-icon :icon="['fas', 'user-plus']" />
           </a>
         </li>
         <li>
-          <a
-            class="fa"
-            href="/formLogin"
-            v-if="this.storedLoginInfo.username == null"
-          >
+          <a class="fa" href="/formLogin" v-if="loginChk">
             <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
           </a>
         </li>
         <li>
-          <a
-            class="fa"
-            href="/logout"
-            v-if="this.storedLoginInfo.username != null"
-          >
+          <a class="fa" href="/logout" v-if="!loginChk">
             <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
           </a>
         </li>
@@ -48,6 +36,9 @@ export default {
   name: "loginInfo",
   computed: {
     ...mapGetters(["storedLoginInfo"]),
+    loginChk() {
+      return this.storedLoginInfo.username == null;
+    },
   },
   mounted() {
     this.$store.commit("storedLoginInfo");
