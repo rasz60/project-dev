@@ -4,6 +4,7 @@
   width: 100%;
   padding: 20px;
   align-content: baseline;
+  min-width: 1200px;
 
   button.fa,
   a.fa {
@@ -108,39 +109,67 @@
       form {
         padding: 10px;
 
-        input#username {
-          width: 91.5%;
-        }
-
-        a.usernameChk {
-          display: inline-block;
-          width: 7%;
-          padding: 0.5%;
-          margin-left: 1.5%;
-          text-align: center;
-          border: 1px solid white;
-          border-radius: 4px;
-        }
-
-        a.usernameChk.chkd {
-          display: inline-block;
-          width: 7%;
-          padding: 0.5%;
-          margin-left: 1.5%;
-          text-align: center;
-          border: 1px solid white;
-          border-radius: 4px;
-        }
-
-        a.usernameChk:hover {
-          cursor: pointer;
-          background-color: white;
-          color: black;
-          font-weight: 800;
-        }
-
         div {
           padding: 10px;
+
+          span.required {
+            color: goldenrod;
+          }
+
+          input#username,
+          input#phoneNumber {
+            width: 86%;
+          }
+
+          input#email {
+            width: 55.3%;
+          }
+
+          select#emailDomain {
+            width: 27%;
+            background-color: black;
+            padding: 5px;
+            border: 1px solid white;
+            border-radius: 4px;
+            color: white;
+          }
+
+          a#usernameChk,
+          a#emailChk,
+          a#phoneNumberChk {
+            display: inline-block;
+            width: 12%;
+            padding: 0.5%;
+            margin-left: 2%;
+            text-align: center;
+            border: 1px solid white;
+            border-radius: 4px;
+          }
+
+          a#usernameChk.chkd,
+          a#emailChk.chkd,
+          a#phoneNumberChk.chkd {
+            background-color: white;
+            color: black;
+            font-weight: 800;
+          }
+
+          a#usernameChk.chk:hover,
+          a#emailChk.chk:hover,
+          a#phoneNumberChk.chk:hover {
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            font-weight: 800;
+          }
+
+          input#pwChk.unchk {
+            color: red;
+          }
+
+          input#pwChk.chkd {
+            color: blue;
+          }
         }
 
         #signup-button-box {

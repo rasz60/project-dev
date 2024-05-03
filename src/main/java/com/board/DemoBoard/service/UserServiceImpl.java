@@ -74,4 +74,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return null;
     }
 
+    public boolean usernameDuplicateChk(String username) {
+        Optional<User> userOptional= userRepository.findByUserName(username);
+        boolean chk = userOptional.isPresent();
+        log.info("usernameDuplicateChk("+username+") : " + chk);
+        return chk;
+    }
+
 }

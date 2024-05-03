@@ -124,17 +124,44 @@ const storedMenuItems = () => {
 
 const loginFrmSubmit = () => {
   var frm = document.querySelector("form.login-box");
-
-  var password = frm.password.value;
-  console.log(password);
-
-  //frm.submit();
+  frm.submit();
 };
 
 const storedLoginInfo = () => {
   storage.getLoginInfo();
 };
 
+const fnUsernameDupChk = async (state, val) => {
+  var chk = false;
+  await axios3.get("/api/v1/usernameDupChk/" + val).then((res) => {
+    chk = res.data;
+  });
+  return chk;
+};
+const fnEmailDupChk = (val) => {
+  var chk = false;
+
+  axios3.get("/api/v1/emailDupChk/" + val).then((res) => {
+    const jsonData = res.data;
+    if (jsonData != null) {
+      chk = true;
+    }
+  });
+  return chk;
+};
+
+const fnPhoneNumberChk = (val) => {
+  var chk = false;
+
+  axios3.get("/api/v1/phoneDupChk/" + val).then((res) => {
+    const jsonData = res.data;
+
+    if (jsonData != null) {
+      chk = true;
+    }
+  });
+  return chk;
+};
 export {
   addOneItem,
   removeOneItem,
@@ -146,4 +173,7 @@ export {
   storedMenuItems,
   loginFrmSubmit,
   storedLoginInfo,
+  fnUsernameDupChk,
+  fnEmailDupChk,
+  fnPhoneNumberChk,
 };
