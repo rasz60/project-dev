@@ -81,4 +81,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return chk;
     }
 
+    public boolean emailDuplicateChk(String email) {
+        Optional<User> userOptional= userRepository.findByEmail(email);
+        boolean chk = userOptional.isPresent();
+        log.info("usernameDuplicateChk("+email+") : " + chk);
+        return chk;
+    }
+
 }

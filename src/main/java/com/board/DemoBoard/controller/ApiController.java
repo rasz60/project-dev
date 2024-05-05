@@ -3,13 +3,18 @@ package com.board.DemoBoard.controller;
 import com.board.DemoBoard.dto.SessionUser;
 import com.board.DemoBoard.service.UserService;
 import com.board.DemoBoard.service.UserServiceImpl;
+import com.board.DemoBoard.utils.EmailUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +23,7 @@ public class ApiController {
 
     private final HttpSession httpSession;
     private final UserService userService;
+    private final EmailUtils emailUtils;
     @GetMapping("/api/v1/loginInfo")
     public SessionUser loginInfo() {
         SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
@@ -31,5 +37,21 @@ public class ApiController {
         boolean chk = userService.usernameDuplicateChk(username);
         log.info("usernameDupChk("+username+") ? " + chk);
         return chk;
+    }
+
+    @GetMapping("/api/v1/emailDupChk/{email}")
+    public boolean emailDupChk(@PathVariable("email") String email) {
+        boolean chk = userService.emailDuplicateChk(email);
+        log.info("emailDupChk("+email+") ? " + chk);
+        return chk;
+    }
+
+    @GetMapping("/api/v1/emailValid/{emailAddress}")
+    public Map<String, Object> emailValid(@PathVariable("emailAddress") String emailAddress) {
+
+        System.out.println(emailAddress);
+        Map<String, Object> emailResult = emailUtils.sendEmail(emailAddress);
+
+        return emailResult;
     }
 }

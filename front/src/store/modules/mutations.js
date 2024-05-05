@@ -124,6 +124,7 @@ const storedMenuItems = () => {
 
 const loginFrmSubmit = () => {
   var frm = document.querySelector("form.login-box");
+
   frm.submit();
 };
 
@@ -132,21 +133,77 @@ const storedLoginInfo = () => {
 };
 
 const fnUsernameDupChk = async (state, val) => {
-  var chk = false;
+  console.log("----------usernameDupChk() : start");
+  var chk = val == "";
+  if (chk) {
+    document.querySelector("input#username").focus();
+    alert("id를 입력해주세요");
+    return false;
+  }
+
+  var rexChk = document.querySelector("span#usernameRex").className;
+  chk = rexChk.indexOf("unchkd") > 0;
+  if (chk) {
+    alert("허용되지 않는 아이디 형식입니다.");
+    return false;
+  }
+
   await axios3.get("/api/v1/usernameDupChk/" + val).then((res) => {
     chk = res.data;
   });
+  var idDupChk = document.querySelector("a#usernameChk");
+  if (chk) {
+    alert("이미 사용 중인 아이디입니다.");
+    document.querySelector("input#username").focus();
+    idDupChk.className = "unchkd";
+  } else {
+    alert("사용할 수 있는 아이디입니다.");
+    idDupChk.className = "chkd";
+    idDupChk.text = "중복확인완료";
+  }
+
   return chk;
 };
-const fnEmailDupChk = (val) => {
+const fnEmailDupChk = async (state, mail) => {
   var chk = false;
+  var mailId = mail.id;
+  var mailDomain = mail.domain;
 
-  axios3.get("/api/v1/emailDupChk/" + val).then((res) => {
-    const jsonData = res.data;
-    if (jsonData != null) {
-      chk = true;
+  var emailDupChk = document.querySelector("a#emailChk");
+
+  if (emailDupChk.className.indexOf("unchkd") >= 0) {
+    if (mailId == "" || mailDomain == "" || mailDomain == "0") {
+      alert("메일을 입력해주세요.");
+
+      if (mailId == "") {
+        document.querySelector("input#email").focus();
+      } else {
+        document.querySelector("select#emailDomain").focus();
+      }
+      return false;
     }
-  });
+
+    await axios3
+      .get("/api/v1/emailDupChk/" + mailId + "@" + mailDomain)
+      .then((res) => {
+        chk = res.data;
+      });
+
+    var emailRex = document.querySelector("span#emailRex");
+    if (chk) {
+      alert("이미 사용 중인 메일 주소입니다.");
+      document.querySelector("input#email").focus();
+      emailDupChk.className = "unchkd";
+      emailRex.className = "info-chk unchkd";
+    } else {
+      alert("가입되지 않은 메일 주소입니다.");
+      emailDupChk.className = "chkd";
+      emailDupChk.text = "중복확인완료";
+      emailRex.className = "info-chk chkd";
+    }
+
+    console.log(mailId + "@" + mailDomain + ":" + chk);
+  }
   return chk;
 };
 

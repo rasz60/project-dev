@@ -6,18 +6,19 @@ import { RouterView } from "vue-router";
   <div id="contents-div">
     <div id="topMenu">
       <ul>
+        <li class="loginUser" v-if="this.loginchk"></li>
         <li>
-          <a class="fa" href="/signup" v-if="loginChk">
+          <a class="fa" href="/signup" v-if="!this.loginchk">
             <font-awesome-icon :icon="['fas', 'user-plus']" />
           </a>
         </li>
         <li>
-          <a class="fa" href="/formLogin" v-if="loginChk">
+          <a class="fa" href="/formLogin" v-if="!this.loginchk">
             <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
           </a>
         </li>
         <li>
-          <a class="fa" href="/logout" v-if="!loginChk">
+          <a class="fa" href="/logout" v-if="this.loginchk">
             <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
           </a>
         </li>
@@ -30,16 +31,25 @@ import { RouterView } from "vue-router";
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
-  computed: {
-    ...mapGetters(["storedLoginInfo"]),
-    loginChk() {
-      return this.storedLoginInfo.username == null;
+  data() {
+    return {
+      loginChk: false,
+      loginUser: null,
+    };
+  },
+  methods: {
+    async getLoginInfo() {
+      await this.axios.get("/api/v1/loginInfo/").then((res) => {
+        const jsonData = res.data;
+
+        if (jsonData != null) {
+          this.loginChk = true;
+          this.loginUser = jsonData.username;
+        }
+      });
     },
   },
-  methods: {},
 };
 </script>
 <style></style>

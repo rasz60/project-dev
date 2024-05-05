@@ -25,6 +25,10 @@ export default {
         target: "http://localhost:5858",
         changeOrigin: true,
       },
+      "^/signup/join": {
+        target: "http://localhost:5858",
+        changeOrigin: true,
+      },
     },
   },
   outputDir: "../src/main/resources/static/vue",

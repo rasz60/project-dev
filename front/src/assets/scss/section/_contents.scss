@@ -102,6 +102,102 @@
       }
     }
 
+    div#blocked {
+      display: none;
+      background-color: black;
+      opacity: 40%;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    div#validEmail {
+      display: none;
+      background-color: whitesmoke;
+      color: black;
+      border-radius: 8px;
+      width: 40%;
+      height: 40%;
+      position: absolute;
+      top: 30%;
+      left: 35%;
+
+      div.validEmail-title {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        border-radius: 8px 8px 0px 0px;
+        border: none;
+        background-color: mediumpurple;
+        color: white;
+        font-size: 25px;
+        span#validEmail-close {
+          cursor: pointer;
+        }
+      }
+
+      div.validEmail-body {
+        padding: 20px;
+        border-radius: 0px 0px 8px 8px;
+        border: none;
+        color: black;
+
+        a {
+          padding: 6px;
+          color: white;
+          border-radius: 4px;
+          margin-left: 4px;
+          margin-right: 4px;
+          cursor: pointer;
+          font-size: 15px;
+        }
+
+        a#sendCode {
+          border: 1px solid mediumpurple;
+          background-color: mediumpurple;
+          color: whitesmoke;
+        }
+
+        a#validSubmit {
+          border: 1px solid darkcyan;
+          background-color: darkcyan;
+        }
+
+        a#validClose {
+          border: 1px solid brown;
+          background-color: brown;
+        }
+
+        div.validCode-box {
+          padding: 30px;
+          margin: 5% auto 0 auto;
+          width: 80%;
+          text-align: center;
+
+          p.timer {
+            margin-bottom: 10px;
+          }
+
+          label {
+            width: 45%;
+          }
+          input {
+            margin-left: 10px;
+            margin-right: 15px;
+            font-size: 16px;
+            width: 30%;
+            color: black;
+            border-bottom: 1px solid black;
+          }
+        }
+        div.validEmail-bottom {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
     .signup-box {
       padding-top: 30px;
       width: 80%;
@@ -109,11 +205,31 @@
       form {
         padding: 10px;
 
-        div {
+        div.row {
+          display: flex;
+          justify-content: space-between;
           padding: 10px;
 
           span.required {
             color: goldenrod;
+          }
+
+          span.info {
+            font-size: 12px;
+            font-style: italic;
+            color: plum;
+          }
+
+          span.info-chk {
+            margin-left: 3px;
+          }
+
+          span.info-chk.chkd {
+            color: greenyellow;
+          }
+
+          span.info-chk.unchkd {
+            color: red;
           }
 
           input#username,
@@ -121,11 +237,13 @@
             width: 86%;
           }
 
-          input#email {
+          input#email,
+          input#phoneNumber {
             width: 55.3%;
           }
 
-          select#emailDomain {
+          select#emailDomain,
+          select#firstNumber {
             width: 27%;
             background-color: black;
             padding: 5px;
@@ -154,21 +272,22 @@
             font-weight: 800;
           }
 
-          a#usernameChk.chk:hover,
-          a#emailChk.chk:hover,
-          a#phoneNumberChk.chk:hover {
+          a#phoneNumberChk.unvalid {
+            border: 1px solid darkgray;
+            color: darkgray;
+          }
+
+          a#usernameChk.unchkd:hover,
+          a#emailChk.unchkd:hover,
+          a#phoneNumberChk.unchkd:hover {
             cursor: pointer;
             background-color: white;
             color: black;
             font-weight: 800;
           }
 
-          input#pwChk.unchk {
+          input#pwChk.unchkd {
             color: red;
-          }
-
-          input#pwChk.chkd {
-            color: blue;
           }
         }
 
