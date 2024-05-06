@@ -17,9 +17,6 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @Slf4j
 public class WebController {
-
-
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final HttpSession httpSession;
@@ -43,7 +40,9 @@ public class WebController {
     public String joinProc(User user) {
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-
         return null;
     }
+
+    @GetMapping("/userInfo")
+    public String userInfo() { return "vue/index"; }
 }

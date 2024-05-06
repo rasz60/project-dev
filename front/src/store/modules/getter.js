@@ -17,10 +17,15 @@ const storedLoginInfo = (state) => {
   return state.loginInfo;
 };
 
+const storedUserInfo = (state) => {
+  return state.userInfo;
+};
+
 export {
   storedTodoItems,
   storedName,
   storedTodoItemsCount,
   storedMenuItems,
   storedLoginInfo,
+  storedUserInfo,
 };

@@ -60,32 +60,50 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     // 사용자 username로 사용자 정보를 가져오는 메소드
     @Override
     public UserDetails loadUserByUsername(String userName) {
-        log.info("userName : " + userName);
         User user;
-        Optional<User> userOptional= userRepository.findByUserName(userName) ;
-        log.info("userOptional.isPresent(" + userName + ") ? " + userOptional.isPresent());
-        if ( userOptional.isPresent() ) {
-            user = userOptional.get();
+        MemberDetails memberDetails = null;
+        try {
+            Optional<User> userOptional = userRepository.findByUserName(userName);
+            log.info("userOptional.isPresent(" + userName + ") ? " + userOptional.isPresent());
+            if (userOptional.isPresent()) {
+                user = userOptional.get();
+                System.out.println(user.getEmail());
+                httpSession.setAttribute("user", new SessionUser(user));
 
-            httpSession.setAttribute("user", new SessionUser(user));
-
-            return new MemberDetails(user);
+                memberDetails = new MemberDetails(user);
+            }
+        } catch (Exception e) {
+            System.out.println("왜 안돼");
+            e.printStackTrace();
         }
-        return null;
+        return memberDetails;
     }
 
     public boolean usernameDuplicateChk(String username) {
         Optional<User> userOptional= userRepository.findByUserName(username);
+
         boolean chk = userOptional.isPresent();
         log.info("usernameDuplicateChk("+username+") : " + chk);
         return chk;
     }
 
     public boolean emailDuplicateChk(String email) {
-        Optional<User> userOptional= userRepository.findByEmail(email);
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean signout(String username) {
+        Optional<User> userOptional = userRepository.findByUserName(username);
         boolean chk = userOptional.isPresent();
-        log.info("usernameDuplicateChk("+email+") : " + chk);
-        return chk;
+        if (chk) {
+            User user = userOptional.get();
+            log.info("===============signout(" + user.getUsername() + ")");
+            userRepository.delete(user);
+        }
+        return this.chkUserExists(username);
+    }
+
+    public boolean chkUserExists(String username) {
+        return userRepository.findByUserName(username).isPresent();
     }
 
 }

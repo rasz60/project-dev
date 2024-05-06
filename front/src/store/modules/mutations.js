@@ -128,10 +128,6 @@ const loginFrmSubmit = () => {
   frm.submit();
 };
 
-const storedLoginInfo = () => {
-  storage.getLoginInfo();
-};
-
 const fnUsernameDupChk = async (state, val) => {
   console.log("----------usernameDupChk() : start");
   var chk = val == "";
@@ -219,6 +215,10 @@ const fnPhoneNumberChk = (val) => {
   });
   return chk;
 };
+
+const storedLoginInfo = () => {
+  storage.getLoginInfo();
+};
 export {
   addOneItem,
   removeOneItem,
@@ -229,8 +229,8 @@ export {
   setUserName,
   storedMenuItems,
   loginFrmSubmit,
-  storedLoginInfo,
   fnUsernameDupChk,
   fnEmailDupChk,
   fnPhoneNumberChk,
+  storedLoginInfo,
 };

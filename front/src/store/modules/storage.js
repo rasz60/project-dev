@@ -40,17 +40,18 @@ const storage = {
     });
     store.state.menuItems = menus;
   },
+
   async getLoginInfo() {
     const loginInfo = {
       username: "",
+      email: "",
+      picture: "",
     };
-
-    await axios2.get("/api/v1/loginInfo/").then((res) => {
+    await axios2.get("/api/v1/loginInfo").then((res) => {
       const jsonData = res.data;
-
-      if (jsonData != null) {
-        loginInfo.username = jsonData.username;
-      }
+      loginInfo.username = jsonData.username;
+      loginInfo.email = jsonData.email;
+      loginInfo.picture = jsonData.picture;
     });
     store.state.loginInfo = loginInfo;
   },

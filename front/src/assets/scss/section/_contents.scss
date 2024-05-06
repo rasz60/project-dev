@@ -198,110 +198,118 @@
       }
     }
 
-    .signup-box {
+    .signup-box,
+    .userInfo-box {
       padding-top: 30px;
       width: 80%;
 
       form {
         padding: 10px;
+      }
 
-        div.row {
-          display: flex;
-          justify-content: space-between;
-          padding: 10px;
+      div.row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
 
-          span.required {
-            color: goldenrod;
-          }
-
-          span.info {
-            font-size: 12px;
-            font-style: italic;
-            color: plum;
-          }
-
-          span.info-chk {
-            margin-left: 3px;
-          }
-
-          span.info-chk.chkd {
-            color: greenyellow;
-          }
-
-          span.info-chk.unchkd {
-            color: red;
-          }
-
-          input#username,
-          input#phoneNumber {
-            width: 86%;
-          }
-
-          input#email,
-          input#phoneNumber {
-            width: 55.3%;
-          }
-
-          select#emailDomain,
-          select#firstNumber {
-            width: 27%;
-            background-color: black;
-            padding: 5px;
-            border: 1px solid white;
-            border-radius: 4px;
-            color: white;
-          }
-
-          a#usernameChk,
-          a#emailChk,
-          a#phoneNumberChk {
-            display: inline-block;
-            width: 12%;
-            padding: 0.5%;
-            margin-left: 2%;
-            text-align: center;
-            border: 1px solid white;
-            border-radius: 4px;
-          }
-
-          a#usernameChk.chkd,
-          a#emailChk.chkd,
-          a#phoneNumberChk.chkd {
-            background-color: white;
-            color: black;
-            font-weight: 800;
-          }
-
-          a#phoneNumberChk.unvalid {
-            border: 1px solid darkgray;
-            color: darkgray;
-          }
-
-          a#usernameChk.unchkd:hover,
-          a#emailChk.unchkd:hover,
-          a#phoneNumberChk.unchkd:hover {
-            cursor: pointer;
-            background-color: white;
-            color: black;
-            font-weight: 800;
-          }
-
-          input#pwChk.unchkd {
-            color: red;
-          }
+        span.required {
+          color: goldenrod;
         }
 
-        #signup-button-box {
-          display: flex;
-          justify-content: center;
-          width: 100%;
+        span.info {
+          font-size: 12px;
+          font-style: italic;
+          color: plum;
+        }
 
-          button.fa,
-          a.fa {
-            font-size: 26px;
-          }
+        span.info-chk {
+          margin-left: 3px;
+        }
+
+        span.info-chk.chkd {
+          color: greenyellow;
+        }
+
+        span.info-chk.unchkd {
+          color: red;
+        }
+
+        input#username,
+        input#phoneNumber {
+          width: 86%;
+        }
+
+        input#emailId,
+        input#phoneNumber {
+          width: 55.3%;
+        }
+
+        select#emailDomain,
+        select#firstNumber {
+          width: 27%;
+          background-color: black;
+          padding: 5px;
+          border: 1px solid white;
+          border-radius: 4px;
+          color: white;
+        }
+
+        a#usernameChk,
+        a#emailChk,
+        a#phoneNumberChk,
+        a#userInfoModify {
+          display: inline-block;
+          width: 12%;
+          padding: 0.5%;
+          margin-left: 2%;
+          text-align: center;
+          border: 1px solid white;
+          border-radius: 4px;
+        }
+
+        a#usernameChk.chkd,
+        a#emailChk.chkd,
+        a#phoneNumberChk.chkd {
+          background-color: white;
+          color: black;
+          font-weight: 800;
+        }
+
+        a#phoneNumberChk.unvalid {
+          border: 1px solid darkgray;
+          color: darkgray;
+        }
+
+        a#usernameChk.unchkd:hover,
+        a#emailChk.unchkd:hover,
+        a#phoneNumberChk.unchkd:hover,
+        a#userInfoModify:hover {
+          cursor: pointer;
+          background-color: white;
+          color: black;
+          font-weight: 800;
+        }
+
+        input#pwChk.unchkd {
+          color: red;
         }
       }
+
+      #signup-button-box,
+      #userInfo-button-box {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        button.fa,
+        a.fa {
+          font-size: 26px;
+        }
+      }
+    }
+
+    .userInfo-box.modify {
+      display: none;
     }
   }
 }

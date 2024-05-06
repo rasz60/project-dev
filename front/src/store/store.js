@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
     todoOldestOrder: true,
     menuItems: storage.fetchMenus(),
     loginInfo: storage.getLoginInfo(),
+    //userInfo: storage.getUserInfo(),
   },
   getters: getters,
   mutations: mutations,

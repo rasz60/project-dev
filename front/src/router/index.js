@@ -3,6 +3,7 @@ import HomeView from "../components/contents/HomeView";
 import MoneyReports from "../components/contents/MoneyReports";
 import LoginView from "../components/contents/LoginView";
 import SignupView from "../components/contents/SignupView";
+import UserInfoView from "../components/contents/UserInfoView";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: "/signup",
       name: "signup",
       component: SignupView,
+    },
+    {
+      path: "/userInfo",
+      name: "userInfo",
+      component: UserInfoView,
     },
   ],
 });

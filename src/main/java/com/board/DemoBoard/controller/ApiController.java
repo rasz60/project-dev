@@ -54,4 +54,13 @@ public class ApiController {
 
         return emailResult;
     }
+
+    @GetMapping("/api/v1/signout/{username}")
+    public Map<String, Object> signout(@PathVariable("username") String username) {
+        Map<String, Object> signoutRst = new HashMap<>();
+
+        boolean chk = userService.signout(username);
+        signoutRst.put("resultCode", (chk ? 500 : 200));
+        return signoutRst;
+    }
 }

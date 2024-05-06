@@ -1,6 +1,7 @@
 package com.board.DemoBoard.controller;
 
 import com.board.DemoBoard.dto.UserForm;
+import com.board.DemoBoard.service.UserService;
 import com.board.DemoBoard.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +16,13 @@ import javax.validation.Valid;
 @Slf4j
 public class UserController {
 
-    private final UserServiceImpl userServiceImpl;
-
-
-
+    private final UserService userService;
 
     @PostMapping("/signup/join")
     public String signUpUser(@RequestParam String userName, @RequestParam String password, @RequestParam String email) throws Exception {
         @Valid
         UserForm userForm = new UserForm(userName, password, email);
-        userServiceImpl.signUpUser(userForm);
+        userService.signUpUser(userForm);
         return "redirect:/formLogin";
     }
 }
