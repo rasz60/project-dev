@@ -26,11 +26,38 @@
 
   #topMenu {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
     height: auto;
     padding: 3px;
     border-bottom: 1px solid rgb(103 103 103 / 92%);
+
+    div.search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+
+      label.searchIpt {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 5%;
+        border: 2px solid #5f5f5f;
+        color: #5f5f5f;
+        border-radius: 50%;
+        height: 30px;
+        margin-right: 10px;
+      }
+      input.searchIpt {
+        width: 90%;
+        height: 90%;
+        background-color: transparent;
+        border: none;
+        color: white;
+        outline: none;
+      }
+    }
 
     ul {
       display: flex;
@@ -256,6 +283,7 @@
 
         a#usernameChk,
         a#emailChk,
+        a#passwordChk,
         a#phoneNumberChk,
         a#userInfoModify {
           display: inline-block;
@@ -269,6 +297,7 @@
 
         a#usernameChk.chkd,
         a#emailChk.chkd,
+        a#passwordChk.chkd,
         a#phoneNumberChk.chkd {
           background-color: white;
           color: black;
@@ -282,6 +311,7 @@
 
         a#usernameChk.unchkd:hover,
         a#emailChk.unchkd:hover,
+        a#passwordChk.unchkd:hover,
         a#phoneNumberChk.unchkd:hover,
         a#userInfoModify:hover {
           cursor: pointer;

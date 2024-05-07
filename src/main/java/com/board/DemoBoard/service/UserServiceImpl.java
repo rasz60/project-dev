@@ -105,5 +105,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public boolean chkUserExists(String username) {
         return userRepository.findByUserName(username).isPresent();
     }
+    public boolean passwordChk(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUserName(username);
 
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            String pw = user.getPassword();
+            System.out.println("@pw : " + pw);
+            System.out.println("@password : " + password);
+            System.out.println("@passwordChk : " + bCryptPasswordEncoder.matches(pw, bCryptPasswordEncoder.encode(password)));
+        }
+        return true;
+    }
 }

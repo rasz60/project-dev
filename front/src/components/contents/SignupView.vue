@@ -221,10 +221,10 @@ export default {
       var chk = false;
       var value = evt.target.value.trim();
 
-      var regExp = /(?=.*[a-z])(?=.*[0-9-_]).{6,20}$/g;
+      var regExp = /[a-z0-9-_]{6,20}$/;
       chk = regExp.test(value);
       var regChk = document.querySelector("span#usernameRex");
-
+      console.log(regExp, value, chk);
       if (chk) {
         regChk.className = "info-chk chkd";
         this.signup.username.last = value;
@@ -399,7 +399,7 @@ export default {
       } else {
         var validCodeIpt = window.btoa(this.validCodeIpt);
         if (validCode == validCodeIpt) {
-          alert("인증이 완료되었습니다.");
+          alert("메일 인증이 완료되었습니다.\n가입을 감사드립니다.");
           var frm = document.querySelector("form.joinFrm");
           frm.submit();
         } else {

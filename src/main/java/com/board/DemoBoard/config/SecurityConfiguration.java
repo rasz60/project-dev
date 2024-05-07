@@ -17,8 +17,9 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
     // 특정 HTTP 요청에 대한 웹 기반 보안 구성
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http.csrf().disable();
+        http.cors().disable();
         http
-            .csrf().disable() //csrf 공격 방어 해제,
             .headers().frameOptions().disable() // h2-console 화면 사용을 위한 옵션
             .and()
                 // 권한 설정

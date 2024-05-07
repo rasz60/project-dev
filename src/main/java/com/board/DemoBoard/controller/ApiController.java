@@ -2,16 +2,14 @@ package com.board.DemoBoard.controller;
 
 import com.board.DemoBoard.dto.SessionUser;
 import com.board.DemoBoard.service.UserService;
-import com.board.DemoBoard.service.UserServiceImpl;
 import com.board.DemoBoard.utils.EmailUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,12 +53,19 @@ public class ApiController {
         return emailResult;
     }
 
-    @GetMapping("/api/v1/signout/{username}")
+    @DeleteMapping("/api/v1/signout/{username}")
     public Map<String, Object> signout(@PathVariable("username") String username) {
         Map<String, Object> signoutRst = new HashMap<>();
-
         boolean chk = userService.signout(username);
         signoutRst.put("resultCode", (chk ? 500 : 200));
         return signoutRst;
+    }
+
+    @GetMapping("/api/v1/passwordChk/{username}/{password}")
+    public Map<String, Object> passwordChk(@PathVariable("username") String username,@PathVariable("password") String password) {
+        Map<String, Object> passwordChkRst = new HashMap<>();
+        boolean chk = userService.passwordChk(username, password);
+        passwordChkRst.put("resultCode", (chk ? 500 : 200));
+        return passwordChkRst;
     }
 }

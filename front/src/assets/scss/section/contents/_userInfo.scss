@@ -1,0 +1,18 @@
+.userInfo-box.modify {
+  div.row {
+    input#username {
+      width: 100% !important;
+    }
+    input#prevPw {
+      width: 86% !important;
+    }
+  }
+
+  div.row.new-pw {
+    display: none !important;
+  }
+}
+
+.userInfo-box.modify {
+  display: none;
+}
