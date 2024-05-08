@@ -221,7 +221,7 @@ export default {
       var chk = false;
       var value = evt.target.value.trim();
 
-      var regExp = /[a-z0-9-_]{6,20}$/;
+      var regExp = /^[a-z0-9-_]{6,20}$/;
       chk = regExp.test(value);
       var regChk = document.querySelector("span#usernameRex");
       console.log(regExp, value, chk);

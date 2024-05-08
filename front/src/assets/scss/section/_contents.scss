@@ -6,6 +6,40 @@
   align-content: baseline;
   min-width: 1200px;
 
+  div.search-box {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 50px;
+    margin-top: 20%;
+
+    label.searchIpt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5%;
+      border: 2px solid #5f5f5f;
+      color: #5f5f5f;
+      border-radius: 50%;
+      height: 30px;
+      margin-right: 10px;
+    }
+    input#searchIpt {
+      width: 90%;
+      height: 90%;
+      background-color: transparent;
+      border-bottom: none;
+      border: none;
+      color: white;
+      outline: none;
+    }
+  }
+
   button.fa,
   a.fa {
     text-align: left;
@@ -26,38 +60,11 @@
 
   #topMenu {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
     height: auto;
     padding: 3px;
     border-bottom: 1px solid rgb(103 103 103 / 92%);
-
-    div.search-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40%;
-
-      label.searchIpt {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 5%;
-        border: 2px solid #5f5f5f;
-        color: #5f5f5f;
-        border-radius: 50%;
-        height: 30px;
-        margin-right: 10px;
-      }
-      input.searchIpt {
-        width: 90%;
-        height: 90%;
-        background-color: transparent;
-        border: none;
-        color: white;
-        outline: none;
-      }
-    }
 
     ul {
       display: flex;

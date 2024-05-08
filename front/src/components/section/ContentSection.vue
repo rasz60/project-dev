@@ -5,20 +5,6 @@ import { RouterView } from "vue-router";
 <template>
   <div id="contents-div">
     <div id="topMenu">
-      <div class="search-box">
-        <label for="searchIpt" class="searchIpt">
-          <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-        </label>
-        <input
-          type="search"
-          id="searchIpt"
-          class="searchIpt"
-          name="searchKeyword"
-          @focus="searchBoxCtrl('f')"
-          @blur="searchBoxCtrl('b')"
-          placeholder="search..."
-        />
-      </div>
       <ul>
         <li>
           <a class="fa" href="/signup" v-if="!chk">

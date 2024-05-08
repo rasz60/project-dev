@@ -53,7 +53,7 @@
       <input
         type="text"
         id="username"
-        v-model="modify.userInfo.username"
+        v-model="info.userInfo.username"
         readonly
       />
     </div>
@@ -72,6 +72,7 @@
         name="prevPw"
         id="prevPw"
         placeholder="비밀번호를 변경하려면 현재 비밀번호를 입력해주세요."
+        v-model="modify.currPassword"
       />
       <a id="passwordChk" class="dupchk unchkd" @click="passwordChk">
         변경하기
@@ -92,12 +93,7 @@
       </div>
     </div>
     <div class="row new-pw">
-      <input
-        type="password"
-        name="pw"
-        id="pw"
-        v-model="modify.userInfo.password"
-      />
+      <input type="password" name="pw" id="pw" v-model="modify.newPassword" />
     </div>
 
     <div class="row new-pw">
@@ -113,18 +109,13 @@
       </div>
     </div>
     <div class="row new-pw">
-      <input
-        type="password"
-        name="pwChk"
-        id="pwChk"
-        v-model="modify.userInfo.password"
-      />
+      <input type="password" name="pwChk" id="pwChk" />
     </div>
 
     <div class="row">
       <label for="emailId">이메일</label>
       <div class="info-box">
-        <span id="emailRex" class="info-chk unchkd">
+        <span id="emailRex" class="info-chk chkd">
           <font-awesome-icon :icon="['far', 'circle-check']" />
         </span>
       </div>
@@ -136,9 +127,15 @@
         id="emailId"
         placeholder="email_ID"
         v-model="modify.emailId"
+        @keyup="modifyEmail()"
       />
       &nbsp;<font-awesome-icon :icon="['fas', 'at']" />&nbsp;
-      <select name="domain" id="emailDomain" v-model="modify.emailDomain">
+      <select
+        name="domain"
+        id="emailDomain"
+        v-model="modify.emailDomain"
+        @change="modifyEmail()"
+      >
         <option value="">--------------</option>
         <option value="gmail.com">gmail.com</option>
         <option value="naver.com">naver.com</option>
@@ -148,8 +145,13 @@
         <option value="hotmail.com">hotmail.com</option>
         <option value="nate.com">nate.com</option>
       </select>
-      <input type="hidden" name="email" v-model="modify.userInfo.email" />
-      <a id="emailChk" class="dupchk unchkd">중복확인</a>
+      <input type="hidden" name="email" v-model="modify.email" />
+      <a
+        id="emailChk"
+        class="dupchk chkd"
+        @click="fnEmailDupChk(this.modify.userInfo.mail)"
+        >중복확인</a
+      >
     </div>
 
     <div id="userInfo-button-box" class="row">
@@ -170,35 +172,33 @@ export default {
         userInfo: this.loginUser,
       },
       modify: {
-        userInfo: this.loginUser,
-        password: "",
+        email: "",
+        currPassword: "",
+        newPassword: "",
         emailId: "",
         emailDomain: "",
+        chkdEmailId: "",
+        chkdEmailDomain: "",
+        emailDupChk: false,
+        pwModiFlag: false,
+        emModiFlag: false,
       },
     };
   },
   methods: {
-    emailChk() {
-      var email = this.loginUser.email;
-      console.log(email);
-      //this.userInfo.emailId = email.substring(0, email.indexOf("@"));
-      return true;
-    },
     modifyInfo(type) {
+      var textBox = document.querySelector("div.userInfo-box.text");
+      var modiBox = document.querySelector("div.userInfo-box.modify");
       if (type == 0) {
-        document.querySelector("div.userInfo-box.text").style.display = "none";
-        document.querySelector("div.userInfo-box.modify").style.display =
-          "block";
-        if (this.modify.emailId == "") {
-          var email = this.modify.userInfo.email;
-          this.modify.emailId = email.substring(0, email.indexOf("@"));
-          this.modify.emailDomain = email.substring(email.indexOf("@") + 1);
-          console.log(this.modify.userInfo);
-        }
+        textBox.style.display = "none";
+        modiBox.style.display = "block";
+        var email = this.info.userInfo.email;
+        this.modify.email = email;
+        this.modify.emailId = email.substring(0, email.indexOf("@"));
+        this.modify.emailDomain = email.substring(email.indexOf("@") + 1);
       } else {
-        document.querySelector("div.userInfo-box.text").style.display = "block";
-        document.querySelector("div.userInfo-box.modify").style.display =
-          "none";
+        textBox.style.display = "block";
+        modiBox.style.display = "none";
       }
     },
     async signout() {
@@ -223,13 +223,65 @@ export default {
       await this.axios
         .get(
           "/api/v1/passwordChk/" +
-            this.modify.userInfo.username +
+            this.info.username +
             "/" +
-            this.modify.userInfo.password
+            this.modify.currPassword
         )
         .then((res) => {
-          console.log(res.data);
+          var resCode = res.data;
+
+          if (resCode.resultCode == 200) {
+            var currPw = document.querySelector("input#prevPw");
+            currPw.readOnly = "true";
+
+            var passwordChkSpan = document.querySelector("span#passwordChk");
+            var passwordChkA = document.querySelector("a#passwordChk");
+
+            passwordChkSpan.className = "info-chk chkd";
+
+            passwordChkA.className = "dupchk chkd";
+            passwordChkA.innerText = "확인완료";
+
+            var newPw = document.querySelectorAll("div.new-pw");
+            console.log(newPw);
+            for (var i = 0; i < newPw.length; i++) {
+              newPw[i].className = "row";
+            }
+          } else {
+            alert("현재 비밀번호와 일치하지 않습니다.");
+            return false;
+          }
         });
+    },
+    modifyEmail() {
+      if (this.modify.chkdEmailId == "" || this.modify.chkdEmailDomain == "") {
+        var email = this.info.userInfo.email;
+        this.modify.chkdEmailId = email.substring(0, email.indexOf("@"));
+        this.modify.chkdEmailDomain = email.substring(email.indexOf("@") + 1);
+      }
+
+      var chkdId = this.modify.chkdEmailId;
+      var chkdDomain = this.modify.chkdEmailDomain;
+
+      var newId = this.modify.emailId;
+      var newDomain = this.modify.emailDomain;
+
+      this.modify.email = newId + "@" + newDomain;
+
+      var emailRex = document.querySelector("span#emailRex");
+      var emailChk = document.querySelector("a#emailChk");
+
+      if (chkdId != newId || chkdDomain != newDomain) {
+        emailRex.className = "info-chk unchkd";
+
+        emailChk.className = "dupchk unchkd";
+        emailChk.innerText = "중복확인";
+      } else {
+        emailRex.className = "info-chk chkd";
+
+        emailChk.className = "dupchk chkd";
+        emailChk.innerText = "확인완료";
+      }
     },
   },
 };

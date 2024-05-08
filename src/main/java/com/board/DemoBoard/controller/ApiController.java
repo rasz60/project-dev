@@ -65,7 +65,8 @@ public class ApiController {
     public Map<String, Object> passwordChk(@PathVariable("username") String username,@PathVariable("password") String password) {
         Map<String, Object> passwordChkRst = new HashMap<>();
         boolean chk = userService.passwordChk(username, password);
-        passwordChkRst.put("resultCode", (chk ? 500 : 200));
+        passwordChkRst.put("resultCode", (chk ? 200 : 500));
+        System.out.println(chk);
         return passwordChkRst;
     }
 }
