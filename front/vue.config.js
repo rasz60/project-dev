@@ -12,6 +12,8 @@ export const defineConfig = {
 
 export default {
   devServer: {
+    proxy: "http://localhost:5858",
+    /*
     proxy: {
       "^/api": {
         target: "http://localhost:5858",
@@ -30,6 +32,7 @@ export default {
         changeOrigin: true,
       },
     },
+    */
   },
   outputDir: "../src/main/resources/static/vue",
   indexPath: "../../templates/vue/index.html",

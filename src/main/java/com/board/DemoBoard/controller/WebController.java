@@ -4,7 +4,10 @@ import com.board.DemoBoard.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticatedPrincipal;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,12 @@ public class WebController {
             model.addAttribute("loginError", "loginError");
         }
         return "vue/index";
+    }
+
+    @GetMapping("/loginSucc")
+    public String loginSucc(HttpServletRequest request, Authentication auth) {
+        String test = auth.getName();
+        return "redirect:/";
     }
 
     @GetMapping("/signup")

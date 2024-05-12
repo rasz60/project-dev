@@ -118,4 +118,12 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false; // true : 사용 불가, false : 사용 가능
     }
+
+    public void modifyPassword(String password) {
+        this.password = password;
+    }
+
+    public void modifyEmail(String email) {
+        this.email = email;
+    }
 }

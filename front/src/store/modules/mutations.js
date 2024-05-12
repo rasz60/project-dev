@@ -123,8 +123,7 @@ const storedMenuItems = () => {
 };
 
 const loginFrmSubmit = () => {
-  var frm = document.querySelector("form.login-box");
-
+  var frm = document.querySelector("form#login-frm");
   frm.submit();
 };
 

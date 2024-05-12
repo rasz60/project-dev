@@ -78,7 +78,7 @@ export default {
         searchLabel.style.color = "white";
         searchLabel.style.border = "none";
       } else {
-        searchBox.style.backgroundColor = "transparent";
+        searchBox.style.backgroundColor = "white";
 
         searchLabel.style.backgroundColor = "transparent";
         searchLabel.style.color = "#5F5F5F";

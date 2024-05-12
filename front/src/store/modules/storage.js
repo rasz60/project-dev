@@ -47,12 +47,17 @@ const storage = {
       email: "",
       picture: "",
     };
-    await axios2.get("/api/v1/loginInfo").then((res) => {
-      const jsonData = res.data;
-      loginInfo.username = jsonData.username;
-      loginInfo.email = jsonData.email;
-      loginInfo.picture = jsonData.picture;
-    });
+    await axios2
+      .get("/api/v1/loginInfo")
+      .then((res) => {
+        const jsonData = res.data;
+        loginInfo.username = jsonData.username;
+        loginInfo.email = jsonData.email;
+        loginInfo.picture = jsonData.picture;
+      })
+      .catch((res) => {
+        console.log(res);
+      });
     store.state.loginInfo = loginInfo;
   },
 };

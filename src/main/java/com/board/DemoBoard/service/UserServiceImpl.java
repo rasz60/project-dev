@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.security.Principal;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -67,16 +69,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             log.info("userOptional.isPresent(" + userName + ") ? " + userOptional.isPresent());
             if (userOptional.isPresent()) {
                 user = userOptional.get();
-                System.out.println(user.getEmail());
-                httpSession.setAttribute("user", new SessionUser(user));
-
+                System.out.println(user.
+                        getEmail());
                 memberDetails = new MemberDetails(user);
             }
         } catch (Exception e) {
-            System.out.println("왜 안돼");
             e.printStackTrace();
         }
         return memberDetails;
+    }
+
+    public User getUserByUsername(String userName) {
+        Optional<User> userOptional = userRepository.findByUserName(userName);
+        return userOptional.get();
     }
 
     public boolean usernameDuplicateChk(String username) {
@@ -112,11 +117,45 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             String pw = user.getPassword();
+            System.out.println(
 
+            );
             chk = bCryptPasswordEncoder.matches(password, pw);
 
             System.out.println(password + "==" + pw + "?"+chk);
         }
+        return chk;
+    }
+
+    public boolean modifyUserInfo(Principal principal, Map<String, Object> info) {
+        boolean chk = false;
+
+        String newPassword = (String)info.get("newPassword");
+        String newEmail = (String)info.get("newEmail");
+
+        Optional<User> userOptional = userRepository.findByUserName(principal.getName());
+
+        if ( userOptional.isPresent() ) {
+            User user = userOptional.get();
+            System.out.println("userinfo modify");
+            if ( "".equals(newPassword) && "".equals(newEmail) ) {
+                chk = true;
+            }
+
+
+            if (! "".equals(newPassword) ) {
+                user.modifyPassword(bCryptPasswordEncoder.encode(newPassword));
+                chk = true;
+            }
+
+            if (! "".equals(newEmail) ) {
+                user.modifyEmail(newEmail);
+                chk = true;
+            }
+
+            userRepository.save(user);
+        }
+
         return chk;
     }
 }

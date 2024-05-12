@@ -4,6 +4,7 @@ import MoneyReports from "../components/contents/MoneyReports";
 import LoginView from "../components/contents/LoginView";
 import SignupView from "../components/contents/SignupView";
 import UserInfoView from "../components/contents/UserInfoView";
+import NoticeBoardView from "../components/contents/NoticeBoardView";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/userInfo",
       name: "userInfo",
       component: UserInfoView,
+    },
+    {
+      path: "/notice",
+      name: "notice",
+      component: NoticeBoardView,
     },
   ],
 });

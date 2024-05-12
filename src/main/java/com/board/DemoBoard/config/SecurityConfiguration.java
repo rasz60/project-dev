@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,7 +23,8 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
         http.cors().disable();
         http
             .headers().frameOptions().disable() // h2-console 화면 사용을 위한 옵션
-            .and()
+
+                .and()
                 // 권한 설정
                 .authorizeRequests() //권한 부여를 위한 메서드
                     .antMatchers( "/"
@@ -48,7 +51,7 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
                 .usernameParameter("userName")
                 .passwordParameter("password")
                 .loginProcessingUrl("/loginProc") // 로그인 정보를 해당 URL로 전달하면 Security가 자동 처리
-                .defaultSuccessUrl("/") // 로그인 완료 후 리턴 URL
+                .defaultSuccessUrl("/loginSucc") // 로그인 완료 후 리턴 URL
             .and()
                 //로그아웃 설정
                 .logout()
@@ -69,6 +72,4 @@ public class SecurityConfiguration /*extends WebSecurityConfigurerAdapter */ /*F
             */
         return http.build();
     }
-
-
 }
